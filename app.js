@@ -23,3 +23,36 @@ menu_item.forEach((item) => {
 		mobile_menu.classList.toggle('active');
 	});
 });
+
+const terminal = document.getElementById("terminal");
+
+const lines = [
+  "Godson@portfolio:~$ whoami\n",
+  "cybersecurity-focused developer\n\n",
+  "Godson@portfolio:~$ ls skills/\n",
+  "security  development  automation\n\n",
+  "Godson@portfolio:~$ status\n",
+  "system secure • learning in progress\n"
+];
+
+let lineIndex = 0;
+let charIndex = 0;
+
+function typeLine() {
+  if (lineIndex >= lines.length) {
+    terminal.innerHTML += '<span class="cursor">▋</span>';
+    return;
+  }
+
+  terminal.textContent += lines[lineIndex][charIndex];
+  charIndex++;
+
+  if (charIndex === lines[lineIndex].length) {
+    lineIndex++;
+    charIndex = 0;
+  }
+
+  setTimeout(typeLine, 30);
+}
+
+typeLine();
