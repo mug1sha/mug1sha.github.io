@@ -71,17 +71,42 @@ const translations = {
 document.addEventListener('DOMContentLoaded', () => {
 
     /* --- 1. Custom Cursor --- */
-    const cursor = document.querySelector('.cursor');
-    if(cursor) {
+    const cursorDot = document.querySelector('.cursor-dot');
+    const cursorOutline = document.querySelector('.cursor-outline');
+    if(cursorDot && cursorOutline) {
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let outlineX = mouseX;
+        let outlineY = mouseY;
+
+        // Immediately hide until first movement to avoid glitchy top-left spawn
+        cursorDot.style.opacity = 0;
+        cursorOutline.style.opacity = 0;
+
         document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
+            cursorDot.style.opacity = 1;
+            cursorOutline.style.opacity = 1;
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            cursorDot.style.left = mouseX + 'px';
+            cursorDot.style.top = mouseY + 'px';
         });
 
-        const hoverElements = document.querySelectorAll('a, button, .project-box');
+        const animateCursor = () => {
+            let distX = mouseX - outlineX;
+            let distY = mouseY - outlineY;
+            outlineX += distX * 0.15;
+            outlineY += distY * 0.15;
+            cursorOutline.style.left = outlineX + 'px';
+            cursorOutline.style.top = outlineY + 'px';
+            requestAnimationFrame(animateCursor);
+        };
+        animateCursor();
+
+        const hoverElements = document.querySelectorAll('a, button, input, textarea, select, .project-box');
         hoverElements.forEach(el => {
-            el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
-            el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+            el.addEventListener('mouseenter', () => cursorOutline.classList.add('hovering'));
+            el.addEventListener('mouseleave', () => cursorOutline.classList.remove('hovering'));
         });
     }
 
@@ -187,33 +212,32 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /* --- 8. Visitor Counter Demo --- */
-    // Simulating a visitor counter since CountAPI is discontinued
-    const counterEl = document.getElementById('visitor-count');
-    if(counterEl) {
-        let visits = localStorage.getItem('site_visits');
-        if(!visits) {
-            visits = Math.floor(Math.random() * 500) + 1000; // Seed with random 1000-1500
-        } else {
-            visits = parseInt(visits) + 1;
-        }
-        localStorage.setItem('site_visits', visits);
-        
-        // Count up animation
-        let count = 0;
-        const target = visits;
-        const duration = 2000;
-        const increment = target / (duration / 16);
-
-        const updateCounter = () => {
-            count += increment;
-            if(count < target) {
-                counterEl.innerText = Math.ceil(count);
-                requestAnimationFrame(updateCounter);
-            } else {
-                counterEl.innerText = target;
+    /* --- 8. Contact Form AJAX --- */
+    const contactForm = document.getElementById('contact-form');
+    const formStatus = document.getElementById('form-status');
+    if(contactForm) {
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            formStatus.style.display = 'block';
+            formStatus.textContent = "Sending message...";
+            
+            try {
+                const response = await fetch(contactForm.action, {
+                    method: 'POST',
+                    body: new FormData(contactForm),
+                    headers: { 'Accept': 'application/json' }
+                });
+                if(response.ok) {
+                    formStatus.textContent = "Thanks for reaching out! I'll get back to you shortly. 🚀";
+                    contactForm.reset();
+                } else {
+                    formStatus.textContent = "Oops! There was a problem submitting your form.";
+                }
+            } catch (error) {
+                formStatus.textContent = "Oops! A network error occurred.";
             }
-        };
-        updateCounter();
+        });
     }
+
+    // Visitor Counter badges are purely driven by HTML action logic and <img> requests.
 });

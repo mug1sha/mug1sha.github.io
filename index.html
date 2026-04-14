@@ -9,7 +9,8 @@
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="cursor"></div>
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
 
     <nav id="main-nav" class="navbar fixed-top">
         <a href="#start" class="brand">
@@ -253,49 +254,70 @@
         </div>
     </section>
 
-    <footer id="contact" class="section footer-section">
+    <section id="contact" class="section contact-section">
         <div class="container">
             <div class="section-header block-reveal">
                 <span class="block-reveal__block cyan-bg"></span>
                 <small class="block-reveal__text section-title bullet-title" data-i18n="nav_contact">Contact /></small>
             </div>
-            <div class="footer-content">
-                <div class="block-reveal">
-                    <span class="block-reveal__block cyan-bg"></span>
-                    <h2 class="block-reveal__text mt-3 pt-3 social-title cyan" data-i18n="find_me_on">Find me on:</h2>
-                </div>
+
+            <div class="contact-grid mt-5" style="display: flex; flex-wrap: wrap; gap: 50px; justify-content: space-between;">
                 
-                <div class="social-links-grid mt-4">
-                    <a href="mailto:godson.mugisha2015@gmail.com" target="_blank" class="social-link block-reveal">
-                        <span class="block-reveal__block cyan-bg"></span>
-                        <span class="block-reveal__text">Email /> godson.mugisha2015@gmail.com</span>
-                    </a>
-                    <a href="tel:+250795009211" class="social-link block-reveal">
-                        <span class="block-reveal__block cyan-bg"></span>
-                        <span class="block-reveal__text">Phone /> +250 795009211</span>
-                    </a>
-                    <a href="https://github.com/mug1sha" target="_blank" class="social-link block-reveal">
-                        <span class="block-reveal__block cyan-bg"></span>
-                        <span class="block-reveal__text">GitHub /> github.com/mug1sha</span>
-                    </a>
-                    <a href="https://www.linkedin.com/in/godson-mugisha-0870ba275" target="_blank" class="social-link block-reveal">
-                        <span class="block-reveal__block cyan-bg"></span>
-                        <span class="block-reveal__text">LinkedIn /> in/godson-mugisha</span>
-                    </a>
-                    <a href="https://www.instagram.com/mug1sha_godson/" target="_blank" class="social-link block-reveal">
-                        <span class="block-reveal__block cyan-bg"></span>
-                        <span class="block-reveal__text">Instagram /> @mug1sha_godson</span>
-                    </a>
+                <!-- LEFT SIDE: Social Links -->
+                <div class="social-side block-reveal" style="flex: 1; min-width: 300px;">
+                    <span class="block-reveal__block cyan-bg"></span>
+                    <div class="block-reveal__text">
+                        <h2 class="social-title cyan mb-4" data-i18n="find_me_on">Find me on:</h2>
+                        <div class="social-links-grid">
+                            <a href="mailto:godson.mugisha2015@gmail.com" target="_blank" class="social-link">
+                                <span class="cyan">Email /></span> godson.mugisha2015@gmail.com
+                            </a>
+                            <a href="tel:+250795009211" class="social-link">
+                                <span class="cyan">Phone /></span> +250 795009211
+                            </a>
+                            <a href="https://github.com/mug1sha" target="_blank" class="social-link">
+                                <span class="cyan">GitHub /></span> github.com/mug1sha
+                            </a>
+                            <a href="https://www.linkedin.com/in/godson-mugisha-0870ba275" target="_blank" class="social-link">
+                                <span class="cyan">LinkedIn /></span> in/godson-mugisha
+                            </a>
+                            <a href="https://www.instagram.com/mug1sha_godson/" target="_blank" class="social-link">
+                                <span class="cyan">Instagram /></span> @mug1sha_godson
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT SIDE: Message Me Form -->
+                <div class="contact-form-section block-reveal" style="flex: 1; min-width: 300px; max-width: 600px;">
+                    <span class="block-reveal__block cyan-bg"></span>
+                    <div class="block-reveal__text">
+                        <h2 class="cyan mb-3">Send a Message</h2>
+                        <form id="contact-form" action="https://formsubmit.co/godsonmugisha2015@gmail.com" method="POST" class="contact-form">
+                            <input type="hidden" name="_subject" value="New Portfolio Message!">
+                            <input type="hidden" name="_captcha" value="false">
+                            <input type="text" name="name" placeholder="Your Name" required class="form-input">
+                            <input type="email" name="email" placeholder="Your Email" required class="form-input">
+                            <textarea name="message" placeholder="Your Message" required class="form-input" rows="5"></textarea>
+                            <button type="submit" class="btn">Send <div class="btn2"></div></button>
+                            <div id="form-status" class="mt-2 cyan" style="display:none; font-family: var(--font-mono); font-size: 0.9rem;"></div>
+                        </form>
+                    </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div class="footer-bottom mt-5 block-reveal">
+    <!-- FOOTER DOWN ON THE FLOOR -->
+    <footer class="footer-bottom-section" style="padding: 20px 0; border-top: 1px solid rgba(0, 255, 255, 0.1); background-color: var(--bg-color);">
+        <div class="container">
+            <div class="footer-bottom block-reveal" style="width: 100%;">
                 <span class="block-reveal__block cyan-bg"></span>
-                <div class="block-reveal__text content-between">
+                <div class="block-reveal__text content-between" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                    <small class="copyright" style="font-size: 0.8rem;">© 2026 Godson Mugisha. All rights reserved.</small>
                     <small class="visitors-badge" title="Total Visitors">
-                        👁 <span id="visitor-count">1</span> <span data-i18n="visitors">Visitors</span>
+                        <img src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fmug1sha.github.io&countColor=%2300ffff" alt="Visitors" class="visitor-img" style="vertical-align: middle; height: 18px;">
                     </small>
-                    <small class="copyright">© 2026 Godson Mugisha. All rights reserved.</small>
                 </div>
             </div>
         </div>
