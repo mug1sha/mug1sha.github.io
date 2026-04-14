@@ -1,0 +1,25 @@
+{
+  "name": "mug1sha.github.io",
+  "version": "1.0.0",
+  "description": "PORTFOLIO WEBSITE",
+  "main": "ai.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mug1sha/mug1sha.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/mug1sha/mug1sha.github.io/issues"
+  },
+  "homepage": "https://github.com/mug1sha/mug1sha.github.io#readme",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.88.0",
+    "dotenv": "^17.4.2"
+  }
+}

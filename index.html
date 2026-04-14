@@ -1,283 +1,307 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" data-theme="dark">
 <head>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5285906978910790"
-    crossorigin="anonymous"></script>
-  <meta charset="UTF-8">
-  <link rel="shortcut icon" href="favicon.jpg" type="image/x-icon">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="hireMe.css">
-  <title>Godson M</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><Godson M/> Portfolio | Cybersecurity | Python Dev</title>
+    <link rel="shortcut icon" href="favicon.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
-  <section id="header">
-    <div class="header container">
-      <div class="nav-bar">
-        <div class="brand">
-          <a href="#hero">
-            <h1><span>G</span>odson <span>M</span>ug1sha</h1>
-          </a>
+    <div class="cursor"></div>
+
+    <nav id="main-nav" class="navbar fixed-top">
+        <a href="#start" class="brand">
+            <span class="cyan">&lt;</span>Godson <span class="cyan">/&gt;</span>
+        </a>
+        <div class="nav-controls">
+            <button id="theme-toggle" class="control-btn" title="Toggle Theme">🌙</button>
+            <select id="lang-toggle" class="control-btn lang-dropdown" title="Select Language">
+                <option value="0">EN</option>
+                <option value="1">FR</option>
+                <option value="2">RW</option>
+            </select>
+            <div class="hamburger">
+                <div class="bar"></div>
+            </div>
         </div>
         <div class="nav-list">
-          <div class="hamburger">
-            <div class="bar"></div>
-          </div>
-          <ul>
-            <li><a href="#hero" data-after="Home">Home</a></li>
-            <li><a href="#services" data-after="Service">Services</a></li>
-            <li><a href="#projects" data-after="Projects">Projects</a></li>
-            <li><a href="#about" data-after="About">About</a></li>
-            <li><a href="#contact" data-after="Contact">Contact</a></li>
-          </ul>
+            <ul>
+                <li><a href="#start" class="nav-link active" data-i18n="nav_start">Start <span>/></span></a></li>
+                <li><a href="#work" class="nav-link" data-i18n="nav_work">Work <span>/></span></a></li>
+                <li><a href="#services" class="nav-link" data-i18n="nav_services">Skills <span>/></span></a></li>
+                <li><a href="#about" class="nav-link" data-i18n="nav_about">About <span>/></span></a></li>
+                <li><a href="#contact" class="nav-link" data-i18n="nav_contact">Contact <span>/></span></a></li>
+            </ul>
         </div>
-      </div>
-    </div>
-  </section>
+    </nav>
 
+    <header id="start" class="section hero-section">
+        <div class="container min100vh">
+            <div class="hero-content">
+                <div class="block-reveal">
+                    <span class="block-reveal__block cyan-bg"></span>
+                    <small class="block-reveal__text section-title mb-3" data-i18n="nav_start">Start /></small>
+                </div>
+                <div class="block-reveal mt-2">
+                    <span class="block-reveal__block cyan-bg"></span>
+                    <h1 class="block-reveal__text subtitle">
+                        Hi, my name is <strong class="cyan">Godson Mug1sha</strong><br>
+                    </h1>
+                </div>
+                <div class="block-reveal mt-1">
+                    <span class="block-reveal__block cyan-bg"></span>
+                    <h1 class="block-reveal__text subtitle anim-words">
+                        <span data-i18n="hero_i">I am a</span> 
+                        <div class="word-slider cyan">
+                            <span class="word">Software Developer</span>
+                            <span class="word">Automation Eng</span>
+                            <span class="word">Security Auditor</span>
+                        </div>
+                    </h1>
+                </div>
+                <div class="block-reveal mt-3">
+                    <span class="block-reveal__block cyan-bg"></span>
+                    <p class="color-gray block-reveal__text" data-i18n="hero_desc">Let me show You...</p>
+                </div>
+                
+                <a href="#work" aria-label="Go to next section" class="scroll-bottom scale-hover mt-5">
+                    <div class="mouse-icon"></div>
+                    <span class="cyan">SCROLL</span>
+                </a>
+            </div>
+            <div class="hero-image block-reveal">
+               <span class="block-reveal__block cyan-bg"></span>
+               <img src="img/MyImages/image4.jpeg" alt="Godson" class="me block-reveal__text">
+            </div>
+        </div>
+    </header>
 
-  <section id="hero">
-    <div class="hero container">
-      <div>
-        <div class="card">
-          <div class="loader">
-            <p>I am </p>
-            <div class="words">
-              <span id="word word-1" class="word">Founder @MShield</span>
-              <span id="word word-2" class="word">a SOC analyst</span>
-              <span id="word word-3" class="word">a devSecOps</span>
-              <span id="word word-4" class="word">a defender</span>
-              <span id="word word-5" class="word">a python developer</span>
-              <span id="word word-6" class="word"> God's fav!</span>
-           </div>
-          </div>
-        </div>
+    <section id="work" class="section work-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="block-reveal">
+                    <span class="block-reveal__block cyan-bg"></span>
+                    <small class="block-reveal__text section-title bullet-title" data-i18n="nav_work">Work /></small>
+                </div>
+                <div class="block-reveal mt-2">
+                    <span class="block-reveal__block cyan-bg"></span>
+                    <h4 class="block-reveal__text" data-i18n="work_subtitle">Selected programming & automation projects...</h4>
+                </div>
+            </div>
 
-        <a href="#projects" type="button" class="cta">Portfolio</a>
-      </div>
-      <div class="BigImage">
-        <img class="me" src="img/MyImages/image4.jpeg" alt="me!">
-      </div>
-  <div class="hero-right">
-    <!-- TERMINAL CARD -->
-    <div class="terminal-card">
-      <div class="terminal-header">
-        <span class="dot red"></span>
-        <span class="dot yellow"></span>
-        <span class="dot green"></span>
-      </div>
+            <div class="projects-grid">
+                <div class="project-box v tilt-effect" data-tilt>
+                    <div class="project-image" style="background-image: url('./img/typingSpeedTest.png')"></div>
+                    <div class="project-meta">
+                        <span>Typing Speed<br>Test</span>
+                        <div class="divider"></div>
+                        <div class="project-nav">01<br><span class="arr cyan">→</span></div>
+                    </div>
+                </div>
 
-      <pre id="terminal"></pre>
-    </div>
-  </div>
-    </div>
-  </section>
+                <div class="project-box h tilt-effect offset-down" data-tilt>
+                    <div class="project-image" style="background-image: url('./img/Advanced\\ To-Do\\ App.png')"></div>
+                    <div class="project-meta">
+                        <span>Advanced<br>To-Do App</span>
+                        <div class="divider"></div>
+                        <div class="project-nav">02<br><span class="arr cyan">→</span></div>
+                    </div>
+                </div>
 
-  <section id="services">
-    <div class="services container">
-      <div class="service-top">
-        <h1 class="section-title">Serv<span>i</span>ces</h1>
-        <p>I provide hands‑on cybersecurity support, from securing networks and hardening systems to guiding SMEs 
-          through practical risk reduction. I also build reliable, scalable solutions using Python—automation scripts, 
-          backend services, data workflows, and custom tools tailored to real business needs. My work blends technical 
-          depth with clear communication, helping clients strengthen their security posture while leveraging modern 
-          software to operate smarter and safer.</p>
-      </div>
-      <div class="service-bottom">
-        <div class="service-item">
-          <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
-          <h2>Penetration Testing</h2>
-          <p>I deliver precise, ethical, impact‑driven penetration testing that cuts straight through surface‑level 
-            defenses. From targeted assessments to full‑scale simulations, I expose vulnerabilities with speed, accuracy, 
-            and zero noise. Test smarter, fortify faster, and keep your systems unbreakable at every layer.</p>
-        </div>
-        <div class="service-item">
-          <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
-          <h2>Security Audit</h2>
-          <p>I deliver thorough, actionable, and standards-aligned security audits that reveal what others miss. From
-            infrastructure reviews to policy assessments, I evaluate your systems for resilience, compliance, and risk
-            exposure. Let’s audit smart, fix fast, and build trust through security at every layer.</p>
-        </div>
-        <div class="service-item">
-          <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
-          <h2>computer programming</h2>
-          <p>I build clean, efficient, and secure applications and websites engineered to solve real problems with 
-            precision. From automation scripts to full‑scale platforms, I deliver code with speed, clarity, reliability,
-             and intent. Code smarter, scale faster, and keep your data locked down at every step.</p>
-        </div>
-        <div class="service-item">
-          <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
-          <h2>Job Automation</h2>
-          <p>I automate repetitive tasks using Python to save you time, cut costs, and boost productivity. From data
-            entry and web scraping to email handling and report generation, I build smart, secure workflows that run
-            while you focus on what matters. Let automation do the heavy lifting.
+                <div class="project-box v tilt-effect" data-tilt>
+                    <div class="project-image" style="background-image: url('./img/SMTP\\ Email\\ Automation.png')"></div>
+                    <div class="project-meta">
+                        <span>SMTP Email<br>Automation</span>
+                        <div class="divider"></div>
+                        <div class="project-nav">03<br><span class="arr cyan">→</span></div>
+                    </div>
+                </div>
 
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
+                <div class="project-box h tilt-effect offset-up" data-tilt>
+                    <div class="project-image" style="background-image: url('./img/Universal\\ Downloader.png')"></div>
+                    <div class="project-meta">
+                        <span>Universal<br>Downloader</span>
+                        <div class="divider"></div>
+                        <div class="project-nav">04<br><span class="arr cyan">→</span></div>
+                    </div>
+                </div>
 
-  <section id="projects">
-    <div class="projects container">
-      <div class="projects-header">
-        <h1 class="section-title">Recent <span>Projects</span></h1>
-      </div>
-      <div class="all-projects">
-        <div class="project-item">
-          <div class="project-info">
-            <h1>Project 1</h1>
-            <h2>Typing Speed Test</h2>
-            <p>This project is a sleek and interactive typing speed test built to measure your words-per-minute (WPM)
-              and accuracy in real time. Designed with a clean UI and responsive layout, it challenges users to improve
-              their speed while tracking performance. Whether you're practicing for fun or aiming to level up your
-              productivity, this app delivers fast feedback and a smooth typing experience!
+                <div class="project-box h tilt-effect" data-tilt>
+                    <div class="project-image" style="background-image: url('./img/MovieHub.png')"></div>
+                    <div class="project-meta">
+                        <span>Movie Streaming<br>Web</span>
+                        <div class="divider"></div>
+                        <div class="project-nav">05<br><span class="arr cyan">→</span></div>
+                    </div>
+                </div>
+            </div>
 
-              !</p>
-          </div>
-          <div class="project-img">
-            <img src="./img/typingSpeedTest.png" alt="img">
-          </div>
-        </div>
-        <div class="project-item">
-          <div class="project-info">
-            <h1>Project 2</h1>
-            <h2>Advanced To-Do App</h2>
-            <p>A simple yet powerful app built to help users stay organized, focused, and on time. It allows you to
-              create, manage, and schedule tasks with reminders that keep you on track. With a clean interface and
-              intuitive features, this app turns chaos into clarity—because every goal starts with a plan!</p>
-          </div>
-          <div class="project-img">
-            <img src="./img/Advanced To-Do App.png" alt="img">
-          </div>
-        </div>
-        <div class="project-item">
-          <div class="project-info">
-            <h1>Project 3</h1>
-            <h2>SMTP Email Automation</h2>
-            <p>This Python-powered automation tool sends customized emails using SMTP, streamlining communication tasks
-              like alerts, notifications, or bulk messaging. With secure login, dynamic message handling, and error
-              control, it’s built for speed, efficiency, and reliability. Perfect for saving time and scaling outreach
-              with zero manual hassle
+            <!-- GitHub Contributions Section -->
+            <div class="github-section mt-5 block-reveal" style="margin-top: 80px; width: 100%;">
+                <span class="block-reveal__block cyan-bg"></span>
+                <div class="block-reveal__text github-container">
+                    <div class="github-profile">
+                        <img src="https://github.com/mug1sha.png" alt="mug1sha GitHub" class="github-avatar">
+                        <div class="github-info">
+                            <h3 class="cyan">@mug1sha</h3>
+                            <p data-i18n="git_contributions">Daily Open Source Contributions</p>
+                        </div>
+                    </div>
+                    <div class="github-graph-wrapper">
+                        <!-- Custom cyan themed contribution chart -->
+                        <img src="https://ghchart.rshah.org/00ffff/mug1sha" alt="GitHub Contributions Graph" class="github-chart">
+                    </div>
+                </div>
+            </div>
 
-              !</p>
-          </div>
-          <div class="project-img">
-            <img src="./img/SMTP Email Automation.png" alt="img">
-          </div>
         </div>
-        <div class="project-item">
-          <div class="project-info">
-            <h1>Project 4</h1>
-            <h2>Universal Downloader</h2>
-            <p>A powerful Python and javascript based tool that lets users download videos, audio, or files from various
-              platforms with ease. Designed for speed, flexibility, and simplicity, it supports multiple formats and
-              sources using just a URL. Whether you're grabbing YouTube videos or other media, this downloader puts
-              control in your hands—fast, reliable, and hassle-free!</p>
-          </div>
-          <div class="project-img">
-            <img src="./img/Universal Downloader.png" alt="img">
-          </div>
-        </div>
-        <div class="project-item">
-          <div class="project-info">
-            <h1>Project 5</h1>
-            <h2>Movie Streaming web</h2>
-            <p>A modern, responsive platform built for streaming movies and TV shows with a smooth, cinematic
-              experience. Designed with a user-friendly interface, search functionality, and categorized content, it
-              delivers seamless playback and high-quality visuals. Built for entertainment lovers, this site turns any
-              screen into your personal theater!</p>
-          </div>
-          <div class="project-img">
-            <img src="./img/MovieHub.png" alt="img">
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="about">
-    <div class="about container">
-      <div class="col-left">
-        <div class="about-img">
-          <img src="./img/MyImages/Image3.png" alt="img">
+    <section id="services" class="section services-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="block-reveal">
+                    <span class="block-reveal__block cyan-bg"></span>
+                    <small class="block-reveal__text section-title bullet-title" data-i18n="nav_services">Skills /></small>
+                </div>
+                <div class="block-reveal mt-2">
+                    <span class="block-reveal__block cyan-bg"></span>
+                    <h2 class="block-reveal__text" data-i18n="services_subtitle">I provide hands-on cybersecurity support and scalable automation.</h2>
+                </div>
+            </div>
+            
+            <div class="lab-grid mt-5">
+                <div class="grid-item block-reveal">
+                    <span class="block-reveal__block cyan-bg"></span>
+                    <div class="block-reveal__text">
+                        <p class="cat-name cyan">Security</p>
+                        <p><a>Penetration Testing</a></p>
+                        <p><a>Security Auditing</a></p>
+                        <p><a>SOC Analysis</a></p>
+                        <p><a>DevSecOps</a></p>
+                    </div>
+                </div>
+                <div class="grid-item block-reveal">
+                    <span class="block-reveal__block cyan-bg"></span>
+                    <div class="block-reveal__text">
+                        <p class="cat-name cyan" data-i18n="cat_dev">Development</p>
+                        <p><a data-i18n="skill_python">Python Programming</a></p>
+                        <p><a data-i18n="skill_automation">Job Automation</a></p>
+                        <p><a data-i18n="skill_backend">Backend Services</a></p>
+                        <p><a data-i18n="skill_data">Data Workflows</a></p>
+                    </div>
+                </div>
+                <div class="grid-item block-reveal">
+                    <span class="block-reveal__block cyan-bg"></span>
+                    <div class="block-reveal__text">
+                        <p class="cat-name cyan" data-i18n="cat_tools">Tools</p>
+                        <p><a>Linux/Bash</a></p>
+                        <p><a>Git/GitHub</a></p>
+                        <p><a data-i18n="skill_network">Networking/Hardening</a></p>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="col-right">
-        <h1 class="section-title">About <span>me</span></h1>
-        <h2>Cybersecurity Specialist – Penetration Testing & Python Automation</h2>
-        <p>Hey, I’m Godson Mugisha—a passionate digital creator blending code and cybersecurity to build smart, secure,
-          and high-impact solutions. I specialize in penetration testing, security analysis, Python programming, and
-          automation, delivering work that’s both technically rigorous and strategically effective. Whether I’m
-          simulating advanced threats or scripting intelligent systems, I focus on results, innovation, and resilience.
-          Based in Rwanda, I bring global quality with a local touch. Let’s build something powerful together!</p>
-        <a href="https://drive.google.com/file/d/1k4HXKo9NSpnAmOlh1EkyDfttVcaX0jea/view?usp=sharing"
-          class="cta">Download Resume</a>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="contact">
-    <div class="contact container">
-      <div>
-        <button>
-           <span> Hire Me! </span>
-        </button> 
-      </div>
-      <div class="contact-items">
-        <div class="contact-item">
-          <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/phone.png" /></div>
-          <div class="contact-info">
-            <h1>Phone</h1>
-            <h2>+250 795009211</h2>
-            <h2>+250 793511170</h2>
-          </div>
+    <section id="about" class="section about-section">
+        <div class="container">
+            <div class="section-header block-reveal">
+                <span class="block-reveal__block cyan-bg"></span>
+                <small class="block-reveal__text section-title bullet-title" data-i18n="nav_about">About /></small>
+            </div>
+            <div class="about-flex mt-5">
+                <div class="about-img block-reveal tilt-effect" data-tilt>
+                    <span class="block-reveal__block cyan-bg"></span>
+                    <img src="./img/MyImages/Image3.png" alt="About Godson" class="block-reveal__text">
+                </div>
+                <div class="code-wrp block-reveal">
+                    <span class="block-reveal__block cyan-bg"></span>
+                    <div class="block-reveal__text">
+                        <div class="code-l"><span class="methods">class</span> <span class="propname">GodsonMugisha</span> {</div>
+                        <div class="code-l"><span class="dot">··</span><span class="comment">// Software Developer | Automation Engineer | Security Auditor</span></div>
+                        <div class="code-l"><span class="dot">··</span><span class="methods">constructor</span>() {</div>
+                        <div class="code-l"><span class="dot">····</span><span class="scope">this</span>.<span class="prop2">name</span> <span class="scope">=</span> <span class="string">'Godson Mug1sha'</span>;</div>
+                        <div class="code-l"><span class="dot">····</span><span class="scope">this</span>.<span class="prop2">location</span> <span class="scope">=</span> <span class="string">'Rwanda'</span>;</div>
+                        <div class="code-l"><span class="dot">····</span><span class="scope">this</span>.<span class="prop2">email</span> <span class="scope">=</span> <span class="string">'godson.mugisha2015@gmail.com'</span>;</div>
+                        <div class="code-l"><span class="dot">··</span>}</div>
+                        <div class="code-l"><span class="dot">··</span><span class="propname">getRole</span>() {</div>
+                        <div class="code-l"><span class="dot">····</span><span class="methods">return</span> [</div>
+                        <div class="code-l"><span class="dot">······</span><span class="string">'Software Developer'</span>,</div>
+                        <div class="code-l"><span class="dot">······</span><span class="string">'Automation Engineer'</span>,</div>
+                        <div class="code-l"><span class="dot">······</span><span class="string">'Security Auditor'</span></div>
+                        <div class="code-l"><span class="dot">····</span>];</div>
+                        <div class="code-l"><span class="dot">··</span>}</div>
+                        <div class="code-l"><span class="dot">··</span><span class="propname">getBio</span>() {</div>
+                        <div class="code-l"><span class="dot">····</span><span class="methods">return</span> <span class="string" data-i18n="about_bio">`Passionate digital creator blending code and cybersecurity to build smart, secure, and high-impact solutions. Focused on results, innovation, and resilience.`</span>;</div>
+                        <div class="code-l"><span class="dot">··</span>}</div>
+                        <div class="code-l">} <span class="cursor-blink">|</span></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="block-reveal mt-5 d-inline-block">
+                <span class="block-reveal__block cyan-bg"></span>
+                <div class="block-reveal__text">
+                    <a href="https://drive.google.com/file/d/1k4HXKo9NSpnAmOlh1EkyDfttVcaX0jea/view" target="_blank" class="btn btn-primary" data-i18n="download_resume">
+                        Download Resume <div class="btn2"></div>
+                    </a>
+                </div>
+            </div>
         </div>
-        <div class="contact-item">
-          <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/new-post.png" /></div>
-          <div class="contact-info">
-            <h1>Email</h1>
-            <h2>godson.mugisha2015@gmail.com</h2>
-          </div>
-        </div>
-        <div class="contact-item">
-          <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/map-marker.png" /></div>
-          <div class="contact-info">
-            <h1>Address</h1>
-            <h2>Kicukiro, Kigali, Rwanda</h2>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="footer">
-    <div class="footer container">
-      <div class="brand">
-        <h1><span>G</span>odson <span>M</span>ugisha</h1>
-      </div>
-      <h2>Your Complete Tech Solution</h2>
-      <div class="social-icon">
-        <div class="social-item">
-          <a href="https://www.instagram.com/mug1sha_godson/"><img
-              src="https://img.icons8.com/bubbles/100/000000/instagram-new.png" /></a>
-        </div>
-        <div class="social-item">
-          <a href="https://github.com/mug1sha"><img src="https://img.icons8.com/bubbles/100/github.png"
-              alt="github" /></a>
-        </div>
-        <div class="social-item">
-          <a href="www.linkedin.com/in/godson-mugisha-0870ba275"><img
-              src="https://img.icons8.com/bubbles/100/linkedin.png" alt="linkedin" /></a>
-        </div>
-      </div>
-      <p>Copyright © 2025 Godson. All rights reserved</p>
-    </div>
-  </section>
+    <footer id="contact" class="section footer-section">
+        <div class="container">
+            <div class="section-header block-reveal">
+                <span class="block-reveal__block cyan-bg"></span>
+                <small class="block-reveal__text section-title bullet-title" data-i18n="nav_contact">Contact /></small>
+            </div>
+            <div class="footer-content">
+                <div class="block-reveal">
+                    <span class="block-reveal__block cyan-bg"></span>
+                    <h2 class="block-reveal__text mt-3 pt-3 social-title cyan" data-i18n="find_me_on">Find me on:</h2>
+                </div>
+                
+                <div class="social-links-grid mt-4">
+                    <a href="mailto:godson.mugisha2015@gmail.com" target="_blank" class="social-link block-reveal">
+                        <span class="block-reveal__block cyan-bg"></span>
+                        <span class="block-reveal__text">Email /> godson.mugisha2015@gmail.com</span>
+                    </a>
+                    <a href="tel:+250795009211" class="social-link block-reveal">
+                        <span class="block-reveal__block cyan-bg"></span>
+                        <span class="block-reveal__text">Phone /> +250 795009211</span>
+                    </a>
+                    <a href="https://github.com/mug1sha" target="_blank" class="social-link block-reveal">
+                        <span class="block-reveal__block cyan-bg"></span>
+                        <span class="block-reveal__text">GitHub /> github.com/mug1sha</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/godson-mugisha-0870ba275" target="_blank" class="social-link block-reveal">
+                        <span class="block-reveal__block cyan-bg"></span>
+                        <span class="block-reveal__text">LinkedIn /> in/godson-mugisha</span>
+                    </a>
+                    <a href="https://www.instagram.com/mug1sha_godson/" target="_blank" class="social-link block-reveal">
+                        <span class="block-reveal__block cyan-bg"></span>
+                        <span class="block-reveal__text">Instagram /> @mug1sha_godson</span>
+                    </a>
+                </div>
+            </div>
 
-  <script src="./app.js"></script>
+            <div class="footer-bottom mt-5 block-reveal">
+                <span class="block-reveal__block cyan-bg"></span>
+                <div class="block-reveal__text content-between">
+                    <small class="visitors-badge" title="Total Visitors">
+                        👁 <span id="visitor-count">1</span> <span data-i18n="visitors">Visitors</span>
+                    </small>
+                    <small class="copyright">© 2026 Godson Mugisha. All rights reserved.</small>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+    <script src="./app.js" type="module"></script>
 </body>
-
 </html>
