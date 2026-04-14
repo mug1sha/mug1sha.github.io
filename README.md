@@ -20,7 +20,7 @@ Smooth animations and modern UI/UX
 
 HTML, CSS, JavaScript
 
-GitHub Pages / Vercel / Netlify (for deployment)
+GitHub Pages (for deployment)
 
 📂 Installation
 
