@@ -3,12 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><Godson M/> Portfolio | Cybersecurity | Python Dev</title>
+    <title>Godson M. | Full Stack Developer & Security Engineer</title>
+    <meta name="description" content="Portfolio of Godson Mugisha: Full Stack Developer, Python Automation Engineer, and Security Auditor building resilient, scalable systems.">
+    
+    <meta property="og:title" content="Godson M. | Engineering & Security">
+    <meta property="og:description" content="Building secure, scalable backend systems and powerful automation pipelines.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mug1sha.github.io/">
+    <meta property="og:image" content="https://mug1sha.github.io/img/MyImages/image4.jpeg">
+    
     <link rel="shortcut icon" href="favicon.jpg" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="hireMe.css">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfilePage",
+      "mainEntity": {
+        "@type": "Person",
+        "name": "Godson Mugisha",
+        "jobTitle": ["Full Stack Developer", "Python Automation Engineer", "Junior Security Engineer"],
+        "url": "https://mug1sha.github.io/",
+        "sameAs": [
+          "https://github.com/mug1sha",
+          "https://www.linkedin.com/in/godson-mugisha-0870ba275"
+        ],
+        "knowsAbout": ["Cybersecurity", "Python", "FastAPI", "DevSecOps", "Backend Architecture", "Automation Logic"]
+      }
+    }
+    </script>
 </head>
 <body>
+    <!-- Life Line -->
+    <div class="life-line"></div>
+
+    <!-- Honors Fixed Tab -->
+    <div id="awards-btn" class="honors-tab">
+        <svg viewBox="0 0 24 24"><path d="M12 1L9 9H1l7 5-3 8 7-5 7 5-3-8 7-5h-8l-3-8z"/></svg>
+        <span data-i18n="nav_honors">Honors & Awards</span>
+    </div>
+
+    <!-- Awards Overlay -->
+    <div id="awards-overlay" class="awards-overlay">
+        <span class="close-overlay">&times;</span>
+        <div class="container">
+            <h2 class="cyan subtitle mono mb-5" data-i18n="awards_title">Honors & Certifications</h2>
+            <div class="awards-grid">
+                <div class="award-card">
+                    <h3 class="cyan mb-2">CompTIA Security+</h3>
+                    <p class="color-gray">Industry-standard certification for cybersecurity professionals. (In Progress)</p>
+                </div>
+                <div class="award-card">
+                    <h3 class="cyan mb-2">Cisco Intro to Cyber</h3>
+                    <p class="color-gray">Foundational knowledge in network security and threat management.</p>
+                </div>
+                <div class="award-card">
+                    <h3 class="cyan mb-2">Python for Security</h3>
+                    <p class="color-gray">Specialized certification for building automated security tools and scripts.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-content">
+            <span class="cyan mono">&lt;</span>Godson <span class="cyan">/&gt;</span>
+            <div class="loader-bar">
+                <div class="loader-progress"></div>
+            </div>
+        </div>
+    </div>
+
     <div class="cursor-dot"></div>
     <div class="cursor-outline"></div>
 
@@ -16,65 +83,77 @@
         <a href="#start" class="brand">
             <span class="cyan">&lt;</span>Godson <span class="cyan">/&gt;</span>
         </a>
-        <div class="nav-controls">
-            <button id="theme-toggle" class="control-btn" title="Toggle Theme">🌙</button>
-            <select id="lang-toggle" class="control-btn lang-dropdown" title="Select Language">
-                <option value="0">EN</option>
-                <option value="1">FR</option>
-                <option value="2">RW</option>
-            </select>
-            <div class="hamburger">
-                <div class="bar"></div>
+        
+        <div class="nav-right">
+            <div class="nav-list">
+                <ul>
+                    <li><a href="#start" class="nav-link active" data-i18n="nav_start">Start <span>/></span></a></li>
+                    <li><a href="#work" class="nav-link" data-i18n="nav_work">Work <span>/></span></a></li>
+                    <li><a href="#services" class="nav-link" data-i18n="nav_services">Skills <span>/></span></a></li>
+                    <li><a href="#about" class="nav-link" data-i18n="nav_about">About <span>/></span></a></li>
+                    <li><a href="#gallery" class="nav-link" data-i18n="nav_gallery">Gallery <span>/></span></a></li>
+                    <li><a href="#contact" class="nav-link" data-i18n="nav_contact">Contact <span>/></span></a></li>
+                </ul>
             </div>
-        </div>
-        <div class="nav-list">
-            <ul>
-                <li><a href="#start" class="nav-link active" data-i18n="nav_start">Start <span>/></span></a></li>
-                <li><a href="#work" class="nav-link" data-i18n="nav_work">Work <span>/></span></a></li>
-                <li><a href="#services" class="nav-link" data-i18n="nav_services">Skills <span>/></span></a></li>
-                <li><a href="#about" class="nav-link" data-i18n="nav_about">About <span>/></span></a></li>
-                <li><a href="#contact" class="nav-link" data-i18n="nav_contact">Contact <span>/></span></a></li>
-            </ul>
+
+            <div class="nav-controls">
+                <button id="theme-toggle" class="control-btn" title="Toggle Theme">🌙</button>
+                <select id="lang-toggle" class="control-btn lang-dropdown" title="Select Language">
+                    <option value="0">EN</option>
+                    <option value="1">FR</option>
+                    <option value="2">RW</option>
+                </select>
+            </div>
         </div>
     </nav>
 
     <header id="start" class="section hero-section">
         <div class="container min100vh">
             <div class="hero-content">
-                <div class="block-reveal">
-                    <span class="block-reveal__block cyan-bg"></span>
-                    <small class="block-reveal__text section-title mb-3" data-i18n="nav_start">Start /></small>
+                <div class="reveal-hero delay-1">
+                    <small class="section-title mb-3" data-i18n="nav_start">Start /></small>
                 </div>
-                <div class="block-reveal mt-2">
-                    <span class="block-reveal__block cyan-bg"></span>
-                    <h1 class="block-reveal__text subtitle">
+                <div class="reveal-hero delay-2 mt-2">
+                    <h1 class="subtitle">
                         Hi, my name is <strong class="cyan">Godson Mug1sha</strong><br>
                     </h1>
                 </div>
-                <div class="block-reveal mt-1">
-                    <span class="block-reveal__block cyan-bg"></span>
-                    <h1 class="block-reveal__text subtitle anim-words">
+                <div class="reveal-hero delay-3 mt-1">
+                    <h1 class="subtitle anim-words">
                         <span data-i18n="hero_i">I am a</span> 
                         <div class="word-slider cyan">
                             <span class="word">Software Developer</span>
-                            <span class="word">Automation Eng</span>
+                            <span class="word">Python Automation Eng</span>
                             <span class="word">Security Auditor</span>
                         </div>
                     </h1>
                 </div>
-                <div class="block-reveal mt-3">
-                    <span class="block-reveal__block cyan-bg"></span>
-                    <p class="color-gray block-reveal__text" data-i18n="hero_desc">Let me show You...</p>
+
+                <div class="reveal-hero delay-4 mt-3">
+                    <p class="color-gray max-w-600 mt-2" style="max-width: 600px; line-height: 1.6;" data-i18n="hero_desc">
+                        I architect resilient backend systems, engineer advanced Python automation, and integrate robust security practices from day zero. <b>Uncompromising on performance and clean code.</b>
+                    </p>
                 </div>
                 
-                <a href="#work" aria-label="Go to next section" class="scroll-bottom scale-hover mt-5">
+                <div class="hero-ctas mt-4 reveal-hero delay-4">
+                    <div class="hero-btn-group" style="display: flex; gap: 20px; align-items: center; margin-top: 30px;">
+                        <a href="#work" class="btn btn-primary">View Projects <div class="btn2"></div></a>
+                        <a href="https://drive.google.com/file/d/1k4HXKo9NSpnAmOlh1EkyDfttVcaX0jea/view" target="_blank" class="resume-btn" data-i18n="download_resume">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                            <span>Download Resume</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <a href="#work" aria-label="Go to next section" class="scroll-bottom scale-hover mt-5 reveal-hero delay-4" style="margin-top: 60px;">
                     <div class="mouse-icon"></div>
-                    <span class="cyan">SCROLL</span>
+                    <span class="cyan">SCROLL down \\</span>
                 </a>
             </div>
-            <div class="hero-image block-reveal">
-               <span class="block-reveal__block cyan-bg"></span>
-               <img src="img/MyImages/image4.jpeg" alt="Godson" class="me block-reveal__text">
+            <div class="hero-image reveal-hero delay-4">
+               <div class="diamond-container">
+                   <img src="img/mee.png" alt="Godson" class="me">
+               </div>
             </div>
         </div>
     </header>
@@ -82,67 +161,119 @@
     <section id="work" class="section work-section">
         <div class="container">
             <div class="section-header">
-                <div class="block-reveal">
-                    <span class="block-reveal__block cyan-bg"></span>
-                    <small class="block-reveal__text section-title bullet-title" data-i18n="nav_work">Work /></small>
+                <div class="reveal-work">
+                    <small class="section-title bullet-title" data-i18n="nav_work">Work /></small>
                 </div>
-                <div class="block-reveal mt-2">
-                    <span class="block-reveal__block cyan-bg"></span>
-                    <h4 class="block-reveal__text" data-i18n="work_subtitle">Selected programming & automation projects...</h4>
+                <div class="reveal-work delay-1 mt-2">
+                    <h4 data-i18n="work_subtitle">Selected programming & automation projects...</h4>
                 </div>
             </div>
 
-            <div class="projects-grid">
-                <div class="project-box v tilt-effect" data-tilt>
-                    <div class="project-image" style="background-image: url('./img/typingSpeedTest.png')"></div>
-                    <div class="project-meta">
-                        <span>Typing Speed<br>Test</span>
-                        <div class="divider"></div>
-                        <div class="project-nav">01<br><span class="arr cyan">→</span></div>
+            <div class="projects-list mt-5">
+                <!-- Project 1 -->
+                <div class="project-card reveal-work mb-5">
+                    <div class="project-card-inner">
+                        <div class="project-info">
+                            <div class="project-nav">01 <span class="arr cyan">—</span> Security Tool</div>
+                            <h3 class="mt-2 mb-3">Phishing URL Analyzer</h3>
+                            <p class="color-gray"><strong>Problem:</strong> Increasing rate of sophisticated phishing attacks evading standard filters.</p>
+                            <p class="color-gray mt-1"><strong>Solution:</strong> A Python-based ML heuristic scanner that analyzes URLs for brand impersonation and malicious payloads.</p>
+                            <div class="tech-stack mt-3">
+                                <span class="tag">Python</span>
+                                <span class="tag">ML</span>
+                                <span class="tag">Docker</span>
+                            </div>
+                            <div class="project-metrics mt-3">
+                                <span class="cyan">➜ Detection Rate:</span> 98.4%
+                                <br><span class="cyan">➜ Latency:</span> &lt; 200ms
+                            </div>
+                            <div class="project-links mt-4">
+                                <a href="https://github.com/mug1sha" class="btn btn-primary" target="_blank">View Repo <div class="btn2"></div></a>
+                            </div>
+                        </div>
+                        <div class="project-visual">
+                            <div class="terminal-mockup">
+                                <div class="terminal-header">
+                                    <span class="dot red"></span>
+                                    <span class="dot yellow"></span>
+                                    <span class="dot green"></span>
+                                </div>
+                                <div class="terminal-body mono">
+                                    <span class="cyan">scan_url</span>(target="http://suspicious-login.com")<br>
+                                    > Analyzing headers... [OK]<br>
+                                    > Evaluating heuristics... [WARN]<br>
+                                    > Result: <span class="red">PHISHING DETECTED</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="project-box h tilt-effect offset-down" data-tilt>
-                    <div class="project-image" style="background-image: url('./img/Advanced\\ To-Do\\ App.png')"></div>
-                    <div class="project-meta">
-                        <span>Advanced<br>To-Do App</span>
-                        <div class="divider"></div>
-                        <div class="project-nav">02<br><span class="arr cyan">→</span></div>
+                <!-- Project 2 -->
+                <div class="project-card reveal-work mb-5">
+                    <div class="project-card-inner reverse">
+                        <div class="project-info">
+                            <div class="project-nav">02 <span class="arr cyan">—</span> Backend Infrastructure</div>
+                            <h3 class="mt-2 mb-3">Secure Auth API</h3>
+                            <p class="color-gray"><strong>Architecture:</strong> FastAPI REST endpoints with JWT role-based access control and rate-limiting.</p>
+                            <p class="color-gray mt-1"><strong>Security:</strong> OAuth2 compliance, Bcrypt hashing, Redis-backed brute-force prevention.</p>
+                            <div class="tech-stack mt-3">
+                                <span class="tag">FastAPI</span>
+                                <span class="tag">PostgreSQL</span>
+                                <span class="tag">Redis</span>
+                            </div>
+                            <div class="project-metrics mt-3">
+                                <span class="cyan">➜ Throughput:</span> 5k Req/Sec
+                                <br><span class="cyan">➜ Auth Flow:</span> &lt; 50ms
+                            </div>
+                            <div class="project-links mt-4">
+                                <a href="https://github.com/mug1sha" class="btn btn-primary" target="_blank">View Repo <div class="btn2"></div></a>
+                            </div>
+                        </div>
+                        <div class="project-visual">
+                            <div class="code-mockup">
+                                <div class="code-l"><span class="methods">@app.post</span>(<span class="string">"/login"</span>)</div>
+                                <div class="code-l"><span class="methods">async def</span> <span class="propname">login</span>(form: OAuth2PasswordRequestForm = Depends()):</div>
+                                <div class="code-l"><span class="dot">··</span>user = authenticate_user(db, form.username, form.password)</div>
+                                <div class="code-l"><span class="dot">··</span><span class="methods">if not</span> user:</div>
+                                <div class="code-l"><span class="dot">····</span><span class="methods">raise</span> HTTPException(status_code=400)</div>
+                                <div class="code-l"><span class="dot">··</span><span class="methods">return</span> {<span class="string">"access_token"</span>: create_jwt(user), <span class="string">"type"</span>: <span class="string">"bearer"</span>}</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="project-box v tilt-effect" data-tilt>
-                    <div class="project-image" style="background-image: url('./img/SMTP\\ Email\\ Automation.png')"></div>
-                    <div class="project-meta">
-                        <span>SMTP Email<br>Automation</span>
-                        <div class="divider"></div>
-                        <div class="project-nav">03<br><span class="arr cyan">→</span></div>
-                    </div>
-                </div>
-
-                <div class="project-box h tilt-effect offset-up" data-tilt>
-                    <div class="project-image" style="background-image: url('./img/Universal\\ Downloader.png')"></div>
-                    <div class="project-meta">
-                        <span>Universal<br>Downloader</span>
-                        <div class="divider"></div>
-                        <div class="project-nav">04<br><span class="arr cyan">→</span></div>
-                    </div>
-                </div>
-
-                <div class="project-box h tilt-effect" data-tilt>
-                    <div class="project-image" style="background-image: url('./img/MovieHub.png')"></div>
-                    <div class="project-meta">
-                        <span>Movie Streaming<br>Web</span>
-                        <div class="divider"></div>
-                        <div class="project-nav">05<br><span class="arr cyan">→</span></div>
+                <!-- Project 3 -->
+                <div class="project-card reveal-work">
+                    <div class="project-card-inner">
+                        <div class="project-info">
+                            <div class="project-nav">03 <span class="arr cyan">—</span> Enterprise Automation</div>
+                            <h3 class="mt-2 mb-3">Enterprise SMTP Pipeline</h3>
+                            <p class="color-gray"><strong>Problem:</strong> Manual and error-prone email dispatch for daily operational reports.</p>
+                            <p class="color-gray mt-1"><strong>Solution:</strong> Highly concurrent Python worker that formats logic, injects secure variables, and dispatches via robust SMTP servers.</p>
+                            <div class="tech-stack mt-3">
+                                <span class="tag">Python</span>
+                                <span class="tag">Celery</span>
+                                <span class="tag">SMTP</span>
+                            </div>
+                            <div class="project-metrics mt-3">
+                                <span class="cyan">➜ Delivery Rate:</span> 99.9%
+                                <br><span class="cyan">➜ Scale:</span> 10k+ Emails/Day
+                            </div>
+                            <div class="project-links mt-4">
+                                <a href="https://github.com/mug1sha" class="btn btn-primary" target="_blank">View Repo <div class="btn2"></div></a>
+                            </div>
+                        </div>
+                        <div class="project-visual">
+                             <div style="background-image: url('./img/SMTP%20Email%20Automation.png'); background-size: cover; background-position: center; width: 100%; height: 100%; min-height: 250px; border-radius: 8px;"></div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- GitHub Contributions Section -->
-            <div class="github-section mt-5 block-reveal" style="margin-top: 80px; width: 100%;">
-                <span class="block-reveal__block cyan-bg"></span>
-                <div class="block-reveal__text github-container">
+            <div class="github-section mt-5 reveal-work delay-2" style="margin-top: 80px; width: 100%;">
+                <div class="github-container">
                     <div class="github-profile">
                         <img src="https://github.com/mug1sha.png" alt="mug1sha GitHub" class="github-avatar">
                         <div class="github-info">
@@ -163,44 +294,87 @@
     <section id="services" class="section services-section">
         <div class="container">
             <div class="section-header">
-                <div class="block-reveal">
-                    <span class="block-reveal__block cyan-bg"></span>
-                    <small class="block-reveal__text section-title bullet-title" data-i18n="nav_services">Skills /></small>
+                <div class="reveal-skill">
+                    <small class="section-title bullet-title" data-i18n="nav_services">Skills /></small>
                 </div>
-                <div class="block-reveal mt-2">
-                    <span class="block-reveal__block cyan-bg"></span>
-                    <h2 class="block-reveal__text" data-i18n="services_subtitle">I provide hands-on cybersecurity support and scalable automation.</h2>
+                <div class="reveal-skill mt-2">
+                    <h2 data-i18n="services_subtitle">Hacker-mindset applied to enterprise systems.</h2>
+                </div>
+            </div>
+
+            <!-- Proof Block -->
+            <div class="proof-block mt-5 reveal-skill delay-1">
+                <div class="proof-inner">
+                    <div class="proof-left">
+                        <h3 class="cyan mb-3">Why hire me?</h3>
+                        <ul class="ats-checklist">
+                            <li><strong>Security First:</strong> I write code assuming it will be attacked. Zero-trust principles applied.</li>
+                            <li><strong>Scalable Automation:</strong> I build pipelines that eliminate hours of manual work without failing under load.</li>
+                            <li><strong>Full Lifecycle Ownership:</strong> From architecture design to seamless deployment and monitoring.</li>
+                            <li><strong>Performance Obsessed:</strong> Latency is the enemy. Clean algorithms and optimal queries always.</li>
+                        </ul>
+                    </div>
+                    <div class="proof-right">
+                        <div class="metric-box">
+                            <h4 class="cyan mono">CERTIFICATIONS</h4>
+                            <p class="mt-2 text-sm">CompTIA Security+ (In Prog.)</p>
+                            <p class="text-sm">Cybersecurity Intro (Cisco)</p>
+                        </div>
+                        <div class="metric-box mt-3">
+                            <h4 class="cyan mono">COMMITS</h4>
+                            <p class="mt-2 text-sm">500+ across 15+ Repositories</p>
+                            <p class="text-sm">Focus: Backend & Security</p>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <div class="lab-grid mt-5">
-                <div class="grid-item block-reveal">
-                    <span class="block-reveal__block cyan-bg"></span>
-                    <div class="block-reveal__text">
-                        <p class="cat-name cyan">Security</p>
-                        <p><a>Penetration Testing</a></p>
-                        <p><a>Security Auditing</a></p>
-                        <p><a>SOC Analysis</a></p>
-                        <p><a>DevSecOps</a></p>
+            <div class="skills-grid mt-5">
+                <!-- Backend -->
+                <div class="skill-card reveal-skill delay-1">
+                    <div class="skill-inner">
+                        <div class="skill-header">
+                            <span class="cyan mono">01.</span>
+                            <h3>Backend Architecture</h3>
+                        </div>
+                        <ul class="skill-list mt-3">
+                            <li><span class="cyan">➜</span> Python (FastAPI, Django)</li>
+                            <li><span class="cyan">➜</span> Node.js (Express)</li>
+                            <li><span class="cyan">➜</span> RESTful APIs & Microservices</li>
+                            <li><span class="cyan">➜</span> JWT & OAuth2 Security</li>
+                        </ul>
                     </div>
                 </div>
-                <div class="grid-item block-reveal">
-                    <span class="block-reveal__block cyan-bg"></span>
-                    <div class="block-reveal__text">
-                        <p class="cat-name cyan" data-i18n="cat_dev">Development</p>
-                        <p><a data-i18n="skill_python">Python Programming</a></p>
-                        <p><a data-i18n="skill_automation">Job Automation</a></p>
-                        <p><a data-i18n="skill_backend">Backend Services</a></p>
-                        <p><a data-i18n="skill_data">Data Workflows</a></p>
+
+                <!-- Security -->
+                <div class="skill-card reveal-skill delay-2">
+                    <div class="skill-inner">
+                        <div class="skill-header">
+                            <span class="cyan mono">02.</span>
+                            <h3>Cybersecurity</h3>
+                        </div>
+                        <ul class="skill-list mt-3">
+                            <li><span class="cyan">➜</span> Penetration Testing / Auditing</li>
+                            <li><span class="cyan">➜</span> OWASP Top 10 Mitigation</li>
+                            <li><span class="cyan">➜</span> SOC Analysis & Threat Intel</li>
+                            <li><span class="cyan">➜</span> Nmap, Wireshark, BurpSuite</li>
+                        </ul>
                     </div>
                 </div>
-                <div class="grid-item block-reveal">
-                    <span class="block-reveal__block cyan-bg"></span>
-                    <div class="block-reveal__text">
-                        <p class="cat-name cyan" data-i18n="cat_tools">Tools</p>
-                        <p><a>Linux/Bash</a></p>
-                        <p><a>Git/GitHub</a></p>
-                        <p><a data-i18n="skill_network">Networking/Hardening</a></p>
+
+                <!-- DevOps & Data -->
+                <div class="skill-card reveal-skill delay-3">
+                    <div class="skill-inner">
+                        <div class="skill-header">
+                            <span class="cyan mono">03.</span>
+                            <h3>DevOps & Datastores</h3>
+                        </div>
+                        <ul class="skill-list mt-3">
+                            <li><span class="cyan">➜</span> PostgreSQL & MySQL</li>
+                            <li><span class="cyan">➜</span> Docker Containerization</li>
+                            <li><span class="cyan">➜</span> CI/CD Pipelines (GitHub Actions)</li>
+                            <li><span class="cyan">➜</span> Linux Environments / Bash</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -209,18 +383,15 @@
 
     <section id="about" class="section about-section">
         <div class="container">
-            <div class="section-header block-reveal">
-                <span class="block-reveal__block cyan-bg"></span>
-                <small class="block-reveal__text section-title bullet-title" data-i18n="nav_about">About /></small>
+            <div class="section-header reveal-about">
+                <small class="section-title bullet-title" data-i18n="nav_about">About /></small>
             </div>
             <div class="about-flex mt-5">
-                <div class="about-img block-reveal tilt-effect" data-tilt>
-                    <span class="block-reveal__block cyan-bg"></span>
-                    <img src="./img/MyImages/Image3.png" alt="About Godson" class="block-reveal__text">
+                <div class="about-img reveal-about tilt-effect delay-1" data-tilt>
+                    <img src="./img/MyImages/Image3.png" alt="About Godson">
                 </div>
-                <div class="code-wrp block-reveal">
-                    <span class="block-reveal__block cyan-bg"></span>
-                    <div class="block-reveal__text">
+                <div class="code-wrp reveal-about delay-2">
+                    <div>
                         <div class="code-l"><span class="methods">class</span> <span class="propname">GodsonMugisha</span> {</div>
                         <div class="code-l"><span class="dot">··</span><span class="comment">// Software Developer | Automation Engineer | Security Auditor</span></div>
                         <div class="code-l"><span class="dot">··</span><span class="methods">constructor</span>() {</div>
@@ -243,30 +414,55 @@
                 </div>
             </div>
             
-            <div class="block-reveal mt-5 d-inline-block">
-                <span class="block-reveal__block cyan-bg"></span>
-                <div class="block-reveal__text">
-                    <a href="https://drive.google.com/file/d/1k4HXKo9NSpnAmOlh1EkyDfttVcaX0jea/view" target="_blank" class="btn btn-primary" data-i18n="download_resume">
-                        Download Resume <div class="btn2"></div>
-                    </a>
+            <div class="mt-5 d-inline-block reveal-about delay-3">
+                <a href="https://drive.google.com/file/d/1k4HXKo9NSpnAmOlh1EkyDfttVcaX0jea/view" target="_blank" class="resume-btn" data-i18n="download_resume">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                    <span>Download Resume</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="section gallery-section">
+        <div class="container">
+            <div class="section-header reveal-skill">
+                <small class="section-title bullet-title" data-i18n="nav_gallery">Gallery /></small>
+            </div>
+            <div class="gallery-wrapper mt-5">
+                <div class="gallery-nav nav-prev"><</div>
+                <div class="gallery-grid" id="gallery-carousel">
+                    <div class="gallery-item reveal-skill delay-1">
+                        <img src="img/MyImages/Image3.png" alt="Gallery Image">
+                    </div>
+                    <div class="gallery-item reveal-skill delay-2">
+                        <img src="img/MyImages/image4.jpeg" alt="Gallery Image">
+                    </div>
+                    <div class="gallery-item reveal-skill delay-3">
+                        <img src="img/MyImages/Me.jpg" alt="Gallery Image">
+                    </div>
+                    <div class="gallery-item reveal-skill delay-4">
+                        <img src="img/MyImages/mee.png" alt="Gallery Image">
+                    </div>
+                    <div class="gallery-item reveal-skill delay-5">
+                        <img src="img/MyImages/Mugisha Godson_Photo.jpg" alt="Gallery Image">
+                    </div>
                 </div>
+                <div class="gallery-nav nav-next">></div>
             </div>
         </div>
     </section>
 
     <section id="contact" class="section contact-section">
         <div class="container">
-            <div class="section-header block-reveal">
-                <span class="block-reveal__block cyan-bg"></span>
-                <small class="block-reveal__text section-title bullet-title" data-i18n="nav_contact">Contact /></small>
+            <div class="section-header reveal-contact">
+                <small class="section-title bullet-title" data-i18n="nav_contact">Contact /></small>
             </div>
 
             <div class="contact-grid mt-5" style="display: flex; flex-wrap: wrap; gap: 50px; justify-content: space-between;">
                 
                 <!-- LEFT SIDE: Social Links -->
-                <div class="social-side block-reveal" style="flex: 1; min-width: 300px;">
-                    <span class="block-reveal__block cyan-bg"></span>
-                    <div class="block-reveal__text">
+                <div class="social-side reveal-contact delay-1" style="flex: 1; min-width: 300px;">
+                    <div>
                         <h2 class="social-title cyan mb-4" data-i18n="find_me_on">Find me on:</h2>
                         <div class="social-links-grid">
                             <a href="mailto:godson.mugisha2015@gmail.com" target="_blank" class="social-link">
@@ -289,9 +485,8 @@
                 </div>
 
                 <!-- RIGHT SIDE: Message Me Form -->
-                <div class="contact-form-section block-reveal" style="flex: 1; min-width: 300px; max-width: 600px;">
-                    <span class="block-reveal__block cyan-bg"></span>
-                    <div class="block-reveal__text">
+                <div class="contact-form-section reveal-contact delay-2" style="flex: 1; min-width: 300px; max-width: 600px;">
+                    <div>
                         <h2 class="cyan mb-3">Send a Message</h2>
                         <form id="contact-form" action="https://formsubmit.co/godsonmugisha2015@gmail.com" method="POST" class="contact-form">
                             <input type="hidden" name="_subject" value="New Portfolio Message!">
@@ -316,7 +511,13 @@
                 <div class="block-reveal__text content-between" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
                     <small class="copyright" style="font-size: 0.8rem;">© 2026 Godson Mugisha. All rights reserved.</small>
                     <small class="visitors-badge" title="Total Visitors">
-                        <img src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fmug1sha.github.io&countColor=%2300ffff" alt="Visitors" class="visitor-img" style="vertical-align: middle; height: 18px;">
+                        <span style="display: inline-flex; align-items: center; gap: 8px;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="eye-icon">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                            <img src="https://count.getloli.com/get/@mug1sha-portfolio?theme=cyanea&padding=0" alt="Visitors" class="visitor-img" style="vertical-align: middle; height: 20px;">
+                        </span>
                     </small>
                 </div>
             </div>

@@ -4,6 +4,7 @@
   "description": "PORTFOLIO WEBSITE",
   "main": "ai.js",
   "scripts": {
+    "start": "node ai.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

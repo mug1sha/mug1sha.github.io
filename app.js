@@ -5,19 +5,16 @@ const translations = {
         nav_work: "Work />",
         nav_services: "Skills />",
         nav_about: "About />",
+        nav_gallery: "Gallery />",
         nav_contact: "Contact />",
+        nav_honors: "Honors />",
+        awards_title: "Honors & Certifications",
         hero_i: "I am a",
-        hero_desc: "Let me show You...",
+        hero_desc: "I architect resilient backend systems, engineer advanced Python automation, and integrate robust security practices from day zero. Uncompromising on performance and clean code.",
         work_subtitle: "Selected programming & automation projects...",
-        services_subtitle: "I provide hands-on cybersecurity support and scalable automation.",
-        cat_dev: "Development",
-        cat_tools: "Tools",
-        skill_python: "Python Programming",
-        skill_automation: "Job Automation",
-        skill_backend: "Backend Services",
-        skill_data: "Data Workflows",
-        skill_network: "Networking/Hardening",
-        about_bio: "`Passionate digital creator blending code and cybersecurity to build smart, secure, and high-impact solutions. Focused on results, innovation, and resilience.`",
+        git_contributions: "Daily Open Source Contributions",
+        services_subtitle: "Hacker-mindset applied to enterprise systems.",
+        about_bio: "Passionate digital creator blending code and cybersecurity to build smart, secure, and high-impact solutions. Focused on results, innovation, and resilience.",
         download_resume: "Download Resume",
         find_me_on: "Find me on:",
         visitors: "Visitors"
@@ -27,41 +24,35 @@ const translations = {
         nav_work: "Travaux />",
         nav_services: "Compétences />",
         nav_about: "À Propos />",
+        nav_gallery: "Galerie />",
         nav_contact: "Contact />",
+        nav_honors: "Honneurs />",
+        awards_title: "Distinctions & Certifications",
         hero_i: "Je suis un(e)",
-        hero_desc: "Laissez-moi vous montrer...",
+        hero_desc: "J'architecture des systèmes backend résilients, je conçois des automatisations Python avancées et j'intègre des pratiques de sécurité robustes dès le premier jour.",
         work_subtitle: "Projets d'automatisation et de dev...",
-        services_subtitle: "Je fournis un support pratique en cybersécurité et une automatisation évolutive.",
-        cat_dev: "Développement",
-        cat_tools: "Outils",
-        skill_python: "Programmation Python",
-        skill_automation: "Automatisation",
-        skill_backend: "Services Backend",
-        skill_data: "Flux de Données",
-        skill_network: "Réseau/Durcissement",
-        about_bio: "`Créateur numérique passionné alliant code et cybersécurité pour concevoir des solutions intelligentes, sécurisées et à fort impact. Axé sur les résultats.`",
+        git_contributions: "Contributions Open Source Quotidiennes",
+        services_subtitle: "L'esprit hacker appliqué aux systèmes d'entreprise.",
+        about_bio: "Créateur numérique passionné alliant code et cybersécurité pour concevoir des solutions intelligentes, sécurisées et à fort impact. Axé sur les résultats.",
         download_resume: "Télécharger le CV",
-        find_me_on: "Retrouvez-moi sur:",
+        find_me_on: "Retrouvez-moi on:",
         visitors: "Visiteurs"
     },
     RW: {
         nav_start: "Gutangira />",
         nav_work: "Imirimo />",
         nav_services: "Ubumenyi />",
-        nav_about: "Amajwi />",
+        nav_about: "Ibinyerekeye />",
+        nav_gallery: "Amafoto />",
         nav_contact: "Twandikire />",
+        nav_honors: "Ibihembo />",
+        awards_title: "Ibihembo n'Impamyabumenyi",
         hero_i: "Ndi",
-        hero_desc: "Reka nkwereke...",
+        hero_desc: "Nubaka sisitemu zikomeye, nkanakora porogaramu zihutisha imirimo nifashishije Python, nkanibanda ku mutekano w'ibyo nkora byose.",
         work_subtitle: "Imishinga yatoranyijwe y'ikoranabuhanga...",
-        services_subtitle: "Ntanga ubufasha mu by'umutekano w'ikoranabuhanga.",
-        cat_dev: "Gukora Porogaramu",
-        cat_tools: "Ibikoresho",
-        skill_python: "Gukora Python",
-        skill_automation: "Kwihutisha Imirimo",
-        skill_backend: "Gukora Backend",
-        skill_data: "Gutunganya Amakuru",
-        skill_network: "Iyungunganya/Umutekano",
-        about_bio: "`Umuremyi wa gijitali uhuza kodi n'umutekano w'ikoranabuhanga kugirango akore ibisubizo byiza kandi byizewe. Wibanda ku musaruro n'udushya.`",
+        git_contributions: "Imirimo ya buri munsi mu mushinga ufunguye",
+        services_subtitle: "Uburyo bwo gutekereza nk'umu-hacker mu gukora sisitemu z'ibigo.",
+        about_bio: "Umuremyi wa gijitali uhuza kodi n'umutekano w'ikoranabuhanga kugirango akore ibisubizo byiza kandi byizewe. Wibanda ku musaruro n'udushya.",
         download_resume: "Kuramo Umwirondoro",
         find_me_on: "Nshakira hano:",
         visitors: "Abarusura"
@@ -69,6 +60,32 @@ const translations = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+
+    /* --- 0. Preloader Removal --- */
+    const preloader = document.getElementById('preloader');
+    const hidePreloader = () => {
+        console.log("Hiding preloader...");
+        if(preloader) {
+            preloader.style.opacity = '0';
+            setTimeout(() => {
+                preloader.style.visibility = 'hidden';
+                preloader.style.display = 'none'; // Force remove
+                document.querySelectorAll('.reveal-hero').forEach(el => el.classList.add('active'));
+            }, 600);
+        }
+    };
+    
+    // Use window.onload to ensure images are ready
+    window.onload = () => {
+        console.log("Window loaded");
+        hidePreloader();
+    };
+
+    // Safety fallback
+    setTimeout(() => {
+        console.log("Preloader fallback");
+        hidePreloader();
+    }, 4000); 
 
     /* --- 1. Custom Cursor --- */
     const cursorDot = document.querySelector('.cursor-dot');
@@ -120,40 +137,26 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    /* --- 3. Hamburger Menu --- */
-    const hamburger = document.querySelector('.hamburger');
-    const navList = document.querySelector('.nav-list');
-    const navLinks = document.querySelectorAll('.nav-link');
+    /* --- 4. Intersection Observer for Unique Section Reveals --- */
+    const revealOptions = {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+    };
 
-    if(hamburger) {
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navList.classList.toggle('active');
-        });
-
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                navList.classList.remove('active');
-            });
-        });
-    }
-
-    /* --- 4. Intersection Observer for Block Reveal --- */
-    const revealElements = document.querySelectorAll('.block-reveal');
     const revealObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if(entry.isIntersecting) {
+                console.log("Revealing section:", entry.target);
                 entry.target.classList.add('active');
-                observer.unobserve(entry.target); // Only animate once
+                observer.unobserve(entry.target); 
             }
         });
-    }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    });
+    }, revealOptions);
 
-    revealElements.forEach(el => revealObserver.observe(el));
+    const revealSelectors = ['.reveal-work', '.reveal-skill', '.reveal-about', '.reveal-contact'];
+    revealSelectors.forEach(selector => {
+        document.querySelectorAll(selector).forEach(el => revealObserver.observe(el));
+    });
 
     /* --- 5. Theme Toggle --- */
     const themeBtn = document.getElementById('theme-toggle');
@@ -186,14 +189,54 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
             if(dict[key]) {
-                if(el.innerHTML.includes('<span>/&gt;</span>')) {
-                    el.innerHTML = dict[key].replace('/>', '<span>/></span>');
-                } else {
+                const span = el.querySelector('span');
+                
+                // 1. Special case for nav links (e.g., "Start />")
+                if(el.classList.contains('nav-link') || el.classList.contains('honors-tab')) {
+                    if(dict[key].includes('/>')) {
+                        el.innerHTML = dict[key].replace('/>', '<span>/></span>');
+                    } else if (span) {
+                        span.textContent = dict[key];
+                    } else {
+                        el.textContent = dict[key];
+                    }
+                } 
+                // 2. Case for buttons with <span> inside (like resume-btn)
+                else if (span) {
+                    span.textContent = dict[key];
+                } 
+                // 3. Generic case
+                else {
                     el.textContent = dict[key];
                 }
             }
         });
     };
+
+    /* --- 6. Awards Overlay Logic --- */
+    const awardsBtn = document.getElementById('awards-btn');
+    const awardsOverlay = document.getElementById('awards-overlay');
+    const closeOverlay = document.querySelector('.close-overlay');
+
+    if(awardsBtn && awardsOverlay) {
+        awardsBtn.addEventListener('click', () => {
+            awardsOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeOverlay.addEventListener('click', () => {
+            awardsOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        // Close on escape key
+        window.addEventListener('keydown', (e) => {
+            if(e.key === 'Escape') {
+                awardsOverlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+    }
 
     applyLanguage(currentLangIdx);
 
@@ -201,6 +244,44 @@ document.addEventListener('DOMContentLoaded', () => {
         currentLangIdx = parseInt(e.target.value);
         applyLanguage(currentLangIdx);
     });
+
+    /* --- 7. Gallery Carousel --- */
+    const carousel = document.getElementById('gallery-carousel');
+    const items = document.querySelectorAll('.gallery-item');
+    const prevBtn = document.querySelector('.nav-prev');
+    const nextBtn = document.querySelector('.nav-next');
+    let currentIndex = 2; // Start in the middle
+
+    const updateCarousel = () => {
+        // Shift to center the active item
+        // Calculation: center shift = (wrapperWidth / 2) - (itemWidth / 2) - (index * itemWidth + gap)
+        const offset = (carousel.parentElement.clientWidth / 2) - (400 / 2) - (currentIndex * 330);
+        carousel.style.transform = `translateX(${offset}px)`;
+        
+        items.forEach((item, index) => {
+            item.classList.toggle('active', index === currentIndex);
+        });
+    };
+
+    if(carousel) {
+        nextBtn.addEventListener('click', () => {
+            if(currentIndex < items.length - 1) {
+                currentIndex++;
+                updateCarousel();
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if(currentIndex > 0) {
+                currentIndex--;
+                updateCarousel();
+            }
+        });
+        
+        // Initial setup
+        window.addEventListener('resize', updateCarousel);
+        updateCarousel();
+    }
 
     /* --- 7. Vanilla Tilt Init --- */
     if(typeof VanillaTilt !== 'undefined') {
