@@ -52,16 +52,16 @@
             <h2 class="cyan subtitle mono mb-5" data-i18n="awards_title">Honors & Certifications</h2>
             <div class="awards-grid">
                 <div class="award-card">
-                    <h3 class="cyan mb-2">CompTIA Security+</h3>
-                    <p class="color-gray">Industry-standard certification for cybersecurity professionals. (In Progress)</p>
+                    <h3 class="cyan mb-2" data-i18n="award_1_title">CompTIA Security+</h3>
+                    <p class="color-gray" data-i18n="award_1_desc">Industry-standard certification for cybersecurity professionals. (In Progress)</p>
                 </div>
                 <div class="award-card">
-                    <h3 class="cyan mb-2">Cisco Intro to Cyber</h3>
-                    <p class="color-gray">Foundational knowledge in network security and threat management.</p>
+                    <h3 class="cyan mb-2" data-i18n="award_2_title">Cisco Intro to Cyber</h3>
+                    <p class="color-gray" data-i18n="award_2_desc">Foundational knowledge in network security and threat management.</p>
                 </div>
                 <div class="award-card">
-                    <h3 class="cyan mb-2">Python for Security</h3>
-                    <p class="color-gray">Specialized certification for building automated security tools and scripts.</p>
+                    <h3 class="cyan mb-2" data-i18n="award_3_title">Python for Security</h3>
+                    <p class="color-gray" data-i18n="award_3_desc">Specialized certification for building automated security tools and scripts.</p>
                 </div>
             </div>
         </div>
@@ -108,6 +108,7 @@
     </nav>
 
     <header id="start" class="section hero-section">
+        <canvas id="honeycomb-canvas"></canvas>
         <div class="container min100vh">
             <div class="hero-content">
                 <div class="reveal-hero delay-1">
@@ -151,6 +152,10 @@
                 </a>
             </div>
             <div class="hero-image reveal-hero delay-4">
+               <div class="availability-status">
+                   <span class="pulse-dot"></span>
+                   <span data-i18n="status_available">Open to Opportunities</span>
+               </div>
                <div class="diamond-container">
                    <img src="img/mee.png" alt="Godson" class="me">
                </div>
@@ -510,21 +515,54 @@
                 <span class="block-reveal__block cyan-bg"></span>
                 <div class="block-reveal__text content-between" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
                     <small class="copyright" style="font-size: 0.8rem;">© 2026 Godson Mugisha. All rights reserved.</small>
-                    <small class="visitors-badge" title="Total Visitors">
-                        <span style="display: inline-flex; align-items: center; gap: 8px;">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="eye-icon">
-                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                <circle cx="12" cy="12" r="3"></circle>
-                            </svg>
-                            <img src="https://count.getloli.com/get/@mug1sha-portfolio?theme=cyanea&padding=0" alt="Visitors" class="visitor-img" style="vertical-align: middle; height: 20px;">
-                        </span>
-                    </small>
+                    <div class="visitors-badge" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <span class="eye-icon" style="filter: drop-shadow(0 0 5px var(--accent-glow)); font-size: 1.2rem;">👁️</span>
+                        <span id="visitor-count" class="mono" style="font-weight: 700; color: var(--accent); font-size: 1.1rem;">...</span>
+                        <span data-i18n="viewers" class="mono" style="font-size: 0.8rem; opacity: 0.8;">viewers</span>
+                    </div>
                 </div>
             </div>
         </div>
     </footer>
 
+    <!-- AI Chatbot UI -->
+    <div id="chatbot-trigger" class="chatbot-trigger" title="Chat with AI">
+        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.47 2 2 6.47 2 12c0 1.88.52 3.65 1.41 5.16L2 22l4.84-1.41C8.35 21.48 10.12 22 12 22c5.53 0 10-4.47 10-10S17.53 2 12 2zm0 18c-1.61 0-3.13-.44-4.44-1.21l-.32-.19-2.88.84.84-2.88-.19-.32C4.44 15.13 4 13.61 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/></svg>
+    </div>
+
+    <div id="chatbot-window" class="chatbot-window">
+        <div class="chat-header">
+            <div class="chat-header-info">
+               <div class="chat-avatar">G</div>
+               <div>
+                   <h4 class="mono">Godson's AI</h4>
+                   <span class="status online">Online</span>
+               </div>
+            </div>
+            <button id="close-chat" aria-label="Close Chat">&times;</button>
+        </div>
+        <div id="chat-body" class="chat-body">
+            <div class="message ai">
+                Hi! I'm Godson's digital assistant. How can I help you today?
+            </div>
+            <div class="quick-actions">
+                <button class="qa-btn" data-query="skills">Skills</button>
+                <button class="qa-btn" data-query="projects">Projects</button>
+                <button class="qa-btn" data-query="contact">Contact</button>
+            </div>
+        </div>
+        <div class="chat-footer">
+            <input type="text" id="chat-input" placeholder="Ask me something..." autocomplete="off">
+            <button id="send-btn" aria-label="Send Message">
+                <svg fill="currentColor" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+            </button>
+        </div>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
-    <script src="./app.js" type="module"></script>
+    <script src="./app.js"></script>
+    <script src="./chatbot.js"></script>
+    <script src="./honeycomb.js"></script>
+    <script src="./backgrounds.js"></script>
 </body>
 </html>
