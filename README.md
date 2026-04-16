@@ -22,23 +22,6 @@ HTML, CSS, JavaScript
 
 GitHub Pages (for deployment)
 
-📂 Installation
-
-To run the project locally:
-
-Clone the repository:
-
-git clone https://github.com/your-username/your-portfolio.git
-
-Navigate to the project folder:
-
-cd your-portfolio
-
-Open index.html in your browser (if it's a static website) or run:
-
-npm install  # If using React or any build tool
-npm start    # To start the development server
-
 🚀 Deployment
 
 This website is hosted on GitHub Pages (or specify hosting service). To deploy updates:
