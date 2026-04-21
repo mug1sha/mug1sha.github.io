@@ -8,7 +8,7 @@ const initChatbot = () => {
     const knowledgeBase = {
         greeting: "Hello! I'm Godson's digital assistant. I can tell you about his skills, projects, or how to contact him. What would you like to know?",
         skills: "Godson is a Full Stack Developer & Security Engineer. His top skills include Python (FastAPI, Django), Cybersecurity (Pentesting, OWASP), and DevOps (Docker, CI/CD).",
-        projects: "Some of his key projects include a Phishing URL Analyzer, a Secure Auth API, and an Enterprise SMTP Pipeline. Check the 'Work' section for more details!",
+        projects: "Some of his key projects include Simba Version 2.0, Villas (Real Estate), Phishing URL Analyzer, Secure Auth API, and an Enterprise SMTP Pipeline. Check the 'Work' section for more details!",
         contact: "You can reach Godson via email at godson.mugisha2015@gmail.com or call him at +250 795009211. He's also active on LinkedIn and GitHub.",
         hire: "Godson is currently open to new opportunities! He brings a security-first mindset to software development and automation. You can download his resume directly from the 'About' section.",
         security: "Cybersecurity is at the core of Godson's work. He's a Junior Security Engineer specializing in penetration testing, threat auditing, and building secure backend architectures.",
