@@ -577,9 +577,12 @@
                 <div class="block-reveal__text content-between" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
                     <small class="copyright" style="font-size: 0.8rem;">© 2026 Godson Mugisha. All rights reserved.</small>
                     <div class="visitors-badge" style="display: inline-flex; align-items: center; gap: 8px;">
-                        <span class="eye-icon" style="filter: drop-shadow(0 0 5px var(--accent-glow)); font-size: 1.2rem;">👁️</span>
-                        <span id="visitor-count" class="mono" style="font-weight: 700; color: var(--accent); font-size: 1.1rem;">100</span>
-                        <span data-i18n="viewers" class="mono" style="font-size: 0.8rem; opacity: 0.8;">viewers</span>
+                        <!-- Modified eye icon and viewer count for interactivity -->
+                        <span id="eye-icon" class="eye-icon closed" style="filter: drop-shadow(0 0 5px var(--accent-glow)); font-size: 1.2rem; cursor: pointer;">👁️</span>
+                        <span id="viewer-count-wrapper" class="viewer-count-wrapper hidden">
+                            <span id="visitor-count" class="mono" style="font-weight: 700; color: var(--accent); font-size: 1.1rem;">100</span>
+                            <span data-i18n="viewers" class="mono" style="font-size: 0.8rem; opacity: 0.8;">viewers</span>
+                        </span>
                     </div>
                 </div>
             </div>
