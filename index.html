@@ -599,20 +599,20 @@
             <div class="chat-header-info">
                <div class="chat-avatar">G</div>
                <div>
-                   <h4 class="mono">Godson's AI</h4>
-                   <span class="status online">Online</span>
+                   <h4 id="chatbot-title" class="mono">Godson's AI</h4>
+                   <span id="chatbot-status" class="status online">Online</span>
                </div>
             </div>
             <button id="close-chat" aria-label="Close Chat">&times;</button>
         </div>
         <div id="chat-body" class="chat-body">
-            <div class="message ai">
+            <div id="chatbot-welcome-message" class="message ai" data-chat-welcome="true">
                 Hi! I'm Godson's digital assistant. How can I help you today?
             </div>
             <div class="quick-actions">
-                <button class="qa-btn" data-query="skills">Skills</button>
-                <button class="qa-btn" data-query="projects">Projects</button>
-                <button class="qa-btn" data-query="contact">Contact</button>
+                <button class="qa-btn" data-intent="skills" data-query="Tell me about Godson's skills">Skills</button>
+                <button class="qa-btn" data-intent="projects" data-query="Tell me about Godson's projects">Projects</button>
+                <button class="qa-btn" data-intent="contact" data-query="How can I contact Godson?">Contact</button>
             </div>
         </div>
         <div class="chat-footer">

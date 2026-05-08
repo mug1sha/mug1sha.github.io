@@ -1,43 +1,41 @@
 PORTFOLIO WEBSITE
 
-Click to View https://mug1sha.github.io/
+Live site: https://mug1sha.github.io/
 
+About
 
-🚀 About the Project
+This is Godson Mugisha's personal portfolio site. It now includes a Groq-backed AI assistant and AI-enhanced page translation for the richer content that was previously left in English.
 
-This is my personal portfolio website showcasing my skills, projects, and contact information. It serves as an online resume and a hub for my work.
+Features
 
-🌟 Features
+- Responsive portfolio UI
+- Project showcase with live links
+- Groq-powered assistant for portfolio Q&A
+- AI-assisted language switching for dynamic section copy
 
-Responsive design for mobile and desktop
+Tech
 
-Project showcase with live demo links
+- HTML, CSS, JavaScript
+- Node.js CLI assistant
+- Groq API via `groq-sdk`
 
-Contact form for easy communication
+Environment
 
-Smooth animations and modern UI/UX
+Create a local `.env` file from `.env.example` and set:
 
-🛠️ Technologies Used
+```bash
+GROQ_API_KEY=your_key_here
+GROQ_MODEL=llama-3.1-8b-instant
+```
 
-HTML, CSS, JavaScript
+Notes on deployment
 
-GitHub Pages (for deployment)
+The frontend is static, so the Groq key must stay server-side. The `api/groq.js` handler is designed for serverless platforms such as Vercel. GitHub Pages alone cannot safely run the Groq-backed assistant because it cannot host secret server-side functions.
 
-🚀 Deployment
+CLI assistant
 
-This website is hosted on GitHub Pages (or specify hosting service). To deploy updates:
-
-git add .
-git commit -m "Updated portfolio"
-git push origin main
-
-📬 Contact:
-
-📧 Email: godson.mugisha2015@gmail.com
-
-☎️ Phone: +250 795009211 (whatsapp)
-
-📜 License
-
-This project is open-source and available under the MIT License.
+```bash
+npm install
+npm start
+```
 

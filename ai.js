@@ -1,12 +1,21 @@
-import Anthropic from "@anthropic-ai/sdk";
+import Groq from "groq-sdk";
 import dotenv from "dotenv";
 import readline from "readline";
 
 dotenv.config();
 
-const client = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
+const client = new Groq({
+  apiKey: process.env.GROQ_API_KEY,
 });
+
+const model = process.env.GROQ_MODEL || "llama-3.1-8b-instant";
+
+const systemPrompt = `
+You are Godson's portfolio AI assistant.
+Answer concisely and accurately.
+Focus on Godson Mugisha's skills, projects, security mindset, and contact details.
+If the user asks for unsupported personal details, say you do not have that information.
+`;
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -15,17 +24,21 @@ const rl = readline.createInterface({
 
 async function askAI(prompt) {
   try {
-    const res = await client.messages.create({
-      model: "claude-3-haiku-20240307",
+    const res = await client.chat.completions.create({
+      model,
+      temperature: 0.4,
       max_tokens: 500,
-      messages: [{ role: "user", content: prompt }],
+      messages: [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: prompt },
+      ],
     });
-    return res.content[0].text;
+    return res.choices?.[0]?.message?.content?.trim() || "No response returned.";
   } catch (error) {
-    if (error.status === 400 && error.error?.error?.message.includes("credit balance")) {
-      return "Error: Your Anthropic API credit balance is too low. Please check your account.";
+    if (!process.env.GROQ_API_KEY) {
+      return "Error: Missing GROQ_API_KEY. Add it to your environment before starting the CLI.";
     }
-    return `Error calling Anthropic API: ${error.message}`;
+    return `Error calling Groq API: ${error.message}`;
   }
 }
 

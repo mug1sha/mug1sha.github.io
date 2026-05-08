@@ -83,6 +83,120 @@ const translations = {
     }
 };
 
+const languageDetails = {
+    EN: { code: 'en', label: 'English' },
+    FR: { code: 'fr', label: 'French' },
+    RW: { code: 'rw', label: 'Kinyarwanda' }
+};
+
+const dynamicTranslationSelectors = [
+    '.word-slider .word',
+    '.hero-btn-group .btn',
+    '.scroll-bottom .cyan',
+    '#work .project-nav',
+    '#work .project-info h3',
+    '#work .project-info p',
+    '#work .project-metrics',
+    '#work .project-links a',
+    '#services .skill-header h3',
+    '#services .skill-list li',
+    '#contact .social-link',
+    '#contact .contact-form-section h2'
+];
+
+const dynamicTranslationCache = new Map();
+
+const getDynamicTranslationElements = () => {
+    const seen = new Set();
+    const elements = [];
+
+    dynamicTranslationSelectors.forEach(selector => {
+        document.querySelectorAll(selector).forEach(el => {
+            if (seen.has(el)) return;
+            seen.add(el);
+
+            if (!el.dataset.translateId) {
+                el.dataset.translateId = `dynamic-${elements.length}-${Math.random().toString(36).slice(2, 8)}`;
+            }
+
+            if (!el.dataset.sourceHtml) {
+                el.dataset.sourceHtml = el.innerHTML;
+            }
+
+            elements.push(el);
+        });
+    });
+
+    return elements;
+};
+
+const applyDynamicTranslationMap = (translationMap) => {
+    getDynamicTranslationElements().forEach(el => {
+        const translatedHtml = translationMap[el.dataset.translateId];
+        el.innerHTML = translatedHtml || el.dataset.sourceHtml || el.innerHTML;
+    });
+};
+
+const restoreDynamicEnglish = () => {
+    getDynamicTranslationElements().forEach(el => {
+        if (el.dataset.sourceHtml) {
+            el.innerHTML = el.dataset.sourceHtml;
+        }
+    });
+};
+
+const translateDynamicContent = async (langKey) => {
+    const elements = getDynamicTranslationElements();
+
+    if (!elements.length) return;
+
+    if (langKey === 'EN') {
+        restoreDynamicEnglish();
+        return;
+    }
+
+    const cacheKey = `dynamic-copy:${langKey}`;
+    if (dynamicTranslationCache.has(cacheKey)) {
+        applyDynamicTranslationMap(dynamicTranslationCache.get(cacheKey));
+        return;
+    }
+
+    try {
+        const response = await fetch('/api/groq', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                mode: 'translate_page',
+                targetLanguage: languageDetails[langKey]?.label || 'English',
+                items: elements.map(el => ({
+                    id: el.dataset.translateId,
+                    html: el.dataset.sourceHtml || el.innerHTML
+                }))
+            })
+        });
+
+        if (!response.ok) throw new Error(`Translation request failed with status ${response.status}`);
+
+        const data = await response.json();
+        const translationMap = {};
+
+        (data.items || []).forEach(item => {
+            if (item?.id && item?.translatedHtml) {
+                translationMap[item.id] = item.translatedHtml;
+            }
+        });
+
+        if (!Object.keys(translationMap).length) {
+            throw new Error('Translation response was empty.');
+        }
+
+        dynamicTranslationCache.set(cacheKey, translationMap);
+        applyDynamicTranslationMap(translationMap);
+    } catch (error) {
+        console.warn('Dynamic translation unavailable, using built-in copy only.', error);
+    }
+};
+
 /**
  * Main Initialization logic wrapped for resilience
  */
@@ -217,10 +331,14 @@ const initPortfolio = () => {
         const langSelect = document.getElementById('lang-toggle');
         if (langSelect) {
             const langs = ['EN', 'FR', 'RW'];
-            const applyLanguage = (langIdx) => {
+            const applyLanguage = async (langIdx) => {
                 const langKey = langs[langIdx] || 'EN';
                 langSelect.value = langIdx.toString();
+                langSelect.disabled = true;
                 localStorage.setItem('langIdx', langIdx);
+                document.documentElement.lang = languageDetails[langKey]?.code || 'en';
+                document.documentElement.dataset.language = langKey;
+
                 const dict = translations[langKey];
 
                 document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -236,7 +354,18 @@ const initPortfolio = () => {
                         }
                     }
                 });
+
+                document.dispatchEvent(new CustomEvent('portfolio-languagechange', {
+                    detail: {
+                        langKey,
+                        ...languageDetails[langKey]
+                    }
+                }));
+
+                await translateDynamicContent(langKey);
+                langSelect.disabled = false;
             };
+
             applyLanguage(localStorage.getItem('langIdx') ? parseInt(localStorage.getItem('langIdx')) : 0);
             langSelect.addEventListener('change', (e) => applyLanguage(parseInt(e.target.value)));
         }
