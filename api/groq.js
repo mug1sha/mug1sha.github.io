@@ -1,6 +1,11 @@
 import Groq from "groq-sdk";
 
 const model = process.env.GROQ_MODEL || "llama-3.1-8b-instant";
+const allowedOrigin = process.env.ALLOWED_ORIGIN || "";
+const maxChatMessageLength = 1200;
+const maxContextLength = 1200;
+const maxTranslationItems = 40;
+const maxTranslationHtmlLength = 500;
 
 const portfolioContext = `
 You are Godson's portfolio AI assistant.
@@ -26,8 +31,45 @@ function getClient() {
 }
 
 function sendJson(res, status, payload) {
-  res.status(status).setHeader("Content-Type", "application/json");
+  res
+    .status(status)
+    .setHeader("Content-Type", "application/json")
+    .setHeader("Cache-Control", "no-store, max-age=0");
   res.end(JSON.stringify(payload));
+}
+
+function getRequestOrigin(req) {
+  const originHeader = req.headers.origin;
+
+  if (typeof originHeader === "string" && originHeader) {
+    return originHeader;
+  }
+
+  const protocol =
+    req.headers["x-forwarded-proto"] ||
+    (req.headers.host?.includes("localhost") ? "http" : "https");
+  const host = req.headers["x-forwarded-host"] || req.headers.host || "";
+
+  return host ? `${protocol}://${host}` : "";
+}
+
+function applyCors(req, res) {
+  const requestOrigin = getRequestOrigin(req);
+  const resolvedOrigin = allowedOrigin || requestOrigin || "*";
+
+  res.setHeader("Access-Control-Allow-Origin", resolvedOrigin);
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.setHeader("Vary", "Origin");
+}
+
+function assertAllowedOrigin(req) {
+  if (!allowedOrigin) return;
+
+  const requestOrigin = getRequestOrigin(req);
+  if (requestOrigin && requestOrigin !== allowedOrigin) {
+    throw new Error("Origin not allowed.");
+  }
 }
 
 async function createChatCompletion(messages, options = {}) {
@@ -50,6 +92,10 @@ async function handleChat(body, res) {
     return sendJson(res, 400, { error: "Message is required." });
   }
 
+  if (message.length > maxChatMessageLength) {
+    return sendJson(res, 400, { error: "Message is too long." });
+  }
+
   const completion = await createChatCompletion(
     [
       {
@@ -60,7 +106,7 @@ async function handleChat(body, res) {
         ? [
             {
               role: "system",
-              content: `Useful page context:\n${context}`,
+              content: `Useful page context:\n${context.slice(0, maxContextLength)}`,
             },
           ]
         : []),
@@ -85,10 +131,17 @@ async function handlePageTranslation(body, res) {
     return sendJson(res, 400, { error: "targetLanguage and items are required." });
   }
 
+  if (items.length > maxTranslationItems) {
+    return sendJson(res, 400, { error: "Too many translation items." });
+  }
+
   const sanitizedItems = items
     .map((item) => ({
       id: typeof item.id === "string" ? item.id : "",
-      html: typeof item.html === "string" ? item.html : "",
+      html:
+        typeof item.html === "string"
+          ? item.html.trim().slice(0, maxTranslationHtmlLength)
+          : "",
     }))
     .filter((item) => item.id && item.html);
 
@@ -132,9 +185,7 @@ async function handlePageTranslation(body, res) {
 }
 
 export default async function handler(req, res) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  applyCors(req, res);
 
   if (req.method === "OPTIONS") {
     return res.status(204).end();
@@ -145,6 +196,8 @@ export default async function handler(req, res) {
   }
 
   try {
+    assertAllowedOrigin(req);
+
     const body = req.body && typeof req.body === "object" ? req.body : {};
 
     switch (body.mode) {
@@ -155,6 +208,10 @@ export default async function handler(req, res) {
         return await handleChat(body, res);
     }
   } catch (error) {
+    if (error.message === "Origin not allowed.") {
+      return sendJson(res, 403, { error: error.message });
+    }
+
     return sendJson(res, 500, {
       error: error.message || "Unexpected Groq handler failure.",
     });
