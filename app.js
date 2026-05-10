@@ -22,9 +22,6 @@ const staticTranslations = {
         award_3_desc: 'Specialized certification for building automated security tools and scripts.',
         hero_intro: 'Hi, my name is <strong class="cyan">Godson Mug1sha</strong><br>',
         hero_i: 'I am a',
-        hero_word_1: 'Software Developer',
-        hero_word_2: 'Python Automation Eng',
-        hero_word_3: 'Security Auditor',
         hero_desc: 'I architect resilient backend systems, engineer advanced Python automation, and integrate robust security practices from day zero. <b>Uncompromising on performance and clean code.</b>',
         hero_cta_projects: 'View Projects <div class="btn2"></div>',
         hero_scroll: 'SCROLL down \\',
@@ -55,9 +52,6 @@ const staticTranslations = {
         award_3_desc: 'Certification spécialisée pour créer des outils et scripts de sécurité automatisés.',
         hero_intro: 'Bonjour, je m\'appelle <strong class="cyan">Godson Mug1sha</strong><br>',
         hero_i: 'Je suis',
-        hero_word_1: 'Développeur logiciel',
-        hero_word_2: 'Ingénieur en automatisation Python',
-        hero_word_3: 'Auditeur sécurité',
         hero_desc: 'Je conçois des systèmes backend résilients, développe des automatisations Python avancées et intègre des pratiques de sécurité robustes dès le départ. <b>Sans compromis sur les performances et la qualité du code.</b>',
         hero_cta_projects: 'Voir les projets <div class="btn2"></div>',
         hero_scroll: 'FAIRE DÉFILER \\',
@@ -88,9 +82,6 @@ const staticTranslations = {
         award_3_desc: 'Impamyabushobozi yihariye mu gukora ibikoresho n\'amascript by\'umutekano byikoresha.',
         hero_intro: 'Muraho, nitwa <strong class="cyan">Godson Mug1sha</strong><br>',
         hero_i: 'Ndi',
-        hero_word_1: 'Umwubatsi wa software',
-        hero_word_2: 'Inzobere muri Python automation',
-        hero_word_3: 'Umugenzuzi w\'umutekano',
         hero_desc: 'Nubaka sisitemu za backend zikomeye, ngategura automation ya Python igezweho kandi ngashyiramo umutekano ukomeye kuva ku ntangiriro. <b>Ntabwo nteshuka ku mikorere myiza no kuri code isukuye.</b>',
         hero_cta_projects: 'Reba imishinga <div class="btn2"></div>',
         hero_scroll: 'MANUKA \\',
@@ -104,6 +95,20 @@ const staticTranslations = {
         contact_send_message: 'Ohereza ubutumwa',
         viewers: 'abarebye'
     }
+};
+
+const themeIcons = {
+    dark: `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"></path>
+        </svg>
+    `,
+    light: `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4.2"></circle>
+            <path d="M12 2.5v2.2M12 19.3v2.2M21.5 12h-2.2M4.7 12H2.5M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6M18.7 18.7l-1.6-1.6M6.9 6.9 5.3 5.3"></path>
+        </svg>
+    `
 };
 
 const curatedPageTranslations = {
@@ -288,7 +293,6 @@ const curatedPageTranslations = {
 const pageTranslationSelectors = [
     '[data-i18n]',
     '.hero-content .reveal-hero.delay-2 .subtitle',
-    '.word-slider .word',
     '.hero-btn-group a',
     '.scroll-bottom span',
     '#work .project-nav',
@@ -688,9 +692,12 @@ const initPortfolio = () => {
         let currentLangKey = 'EN';
 
         if (themeBtn) {
+            const themeIcon = themeBtn.querySelector('.theme-icon');
             const applyTheme = (theme) => {
                 document.documentElement.setAttribute('data-theme', theme);
-                themeBtn.textContent = theme === 'dark' ? '☀️' : '🌙';
+                if (themeIcon) {
+                    themeIcon.innerHTML = theme === 'dark' ? themeIcons.light : themeIcons.dark;
+                }
                 localStorage.setItem('theme', theme);
             };
             applyTheme(localStorage.getItem('theme') || 'dark');
