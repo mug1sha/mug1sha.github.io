@@ -1239,7 +1239,7 @@ a {
 
 .gallery-shell {
     position: relative;
-    padding: 20px 0 10px;
+    padding: 20px 0 0;
     isolation: isolate;
 }
 
@@ -1314,7 +1314,7 @@ a {
 
 .gallery-scroll-zone {
     position: relative;
-    height: 150vh;
+    height: calc(118vh - 30px);
 }
 
 .gallery-stage {
@@ -1349,7 +1349,7 @@ a {
     display: flex;
     align-items: center;
     gap: 28px;
-    padding: 24px calc(50vw - 188px) 132px;
+    padding: 18px calc(50vw - 188px) 92px;
     will-change: transform;
     transform: translate3d(0, 0, 0);
     transform-style: preserve-3d;
@@ -2097,12 +2097,12 @@ a {
 
 @media (max-width: 1100px) {
     .gallery-scroll-zone {
-        height: 138vh;
+        height: calc(112vh - 30px);
     }
 
     .gallery-track {
         gap: 24px;
-        padding: 18px calc(50vw - 168px) 124px;
+        padding: 14px calc(50vw - 168px) 86px;
     }
 
     .gallery-panel {
