@@ -98,11 +98,11 @@
 
             <div class="nav-controls">
                 <button id="theme-toggle" class="control-btn" title="Toggle Theme">🌙</button>
-                <select id="lang-toggle" class="control-btn lang-dropdown" title="Select Language">
-                    <option value="0">EN</option>
-                    <option value="1">FR</option>
-                    <option value="2">RW</option>
-                </select>
+                <div class="lang-switcher" role="group" aria-label="Select Language">
+                    <button type="button" class="lang-segment active" data-lang="EN" aria-pressed="true">EN</button>
+                    <button type="button" class="lang-segment" data-lang="FR" aria-pressed="false">FR</button>
+                    <button type="button" class="lang-segment" data-lang="RW" aria-pressed="false">RW</button>
+                </div>
             </div>
         </div>
     </nav>
@@ -115,7 +115,7 @@
                     <small class="section-title mb-3" data-i18n="nav_start">Start /></small>
                 </div>
                 <div class="reveal-hero delay-2 mt-2">
-                    <h1 class="subtitle">
+                    <h1 class="subtitle" data-i18n="hero_intro">
                         Hi, my name is <strong class="cyan">Godson Mug1sha</strong><br>
                     </h1>
                 </div>
@@ -123,9 +123,9 @@
                     <h1 class="subtitle anim-words">
                         <span data-i18n="hero_i">I am a</span> 
                         <div class="word-slider cyan">
-                            <span class="word">Software Developer</span>
-                            <span class="word">Python Automation Eng</span>
-                            <span class="word">Security Auditor</span>
+                            <span class="word" data-i18n="hero_word_1">Software Developer</span>
+                            <span class="word" data-i18n="hero_word_2">Python Automation Eng</span>
+                            <span class="word" data-i18n="hero_word_3">Security Auditor</span>
                         </div>
                     </h1>
                 </div>
@@ -138,7 +138,7 @@
                 
                 <div class="hero-ctas mt-4 reveal-hero delay-4">
                     <div class="hero-btn-group" style="display: flex; gap: 20px; align-items: center; margin-top: 30px;">
-                        <a href="#work" class="btn btn-primary">View Projects <div class="btn2"></div></a>
+                        <a href="#work" class="btn btn-primary" data-i18n="hero_cta_projects">View Projects <div class="btn2"></div></a>
                         <a href="https://drive.google.com/file/d/1k4HXKo9NSpnAmOlh1EkyDfttVcaX0jea/view" target="_blank" class="resume-btn" data-i18n="download_resume">
                             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
                             <span>Download Resume</span>
@@ -148,7 +148,7 @@
                 
                 <a href="#work" aria-label="Go to next section" class="scroll-bottom scale-hover mt-5 reveal-hero delay-4" style="margin-top: 60px;">
                     <div class="mouse-icon"></div>
-                    <span class="cyan">SCROLL down \</span>
+                    <span class="cyan" data-i18n="hero_scroll">SCROLL down \</span>
                 </a>
             </div>
             <div class="hero-image reveal-hero delay-4">
@@ -553,7 +553,7 @@
                 <!-- RIGHT SIDE: Message Me Form -->
                 <div class="contact-form-section reveal-contact delay-2" style="flex: 1; min-width: 300px; max-width: 600px;">
                     <div>
-                        <h2 class="cyan mb-3">Send a Message</h2>
+                        <h2 class="cyan mb-3" data-i18n="contact_send_message">Send a Message</h2>
                         <form id="contact-form" action="https://formsubmit.co/godsonmugisha2015@gmail.com" method="POST" class="contact-form">
                             <input type="hidden" name="_subject" value="New Portfolio Message!">
                             <input type="hidden" name="_captcha" value="false">
@@ -624,9 +624,9 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
-    <script src="./app.js"></script>
-    <script src="./chatbot.js"></script>
-    <script src="./honeycomb.js"></script>
-    <script src="./backgrounds.js"></script>
+    <script src="./app.js?v=20260510-6"></script>
+    <script src="./chatbot.js?v=20260510-6"></script>
+    <script src="./honeycomb.js?v=20260510-6"></script>
+    <script src="./backgrounds.js?v=20260510-6"></script>
 </body>
 </html>

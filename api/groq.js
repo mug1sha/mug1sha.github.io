@@ -4,8 +4,8 @@ const model = process.env.GROQ_MODEL || "llama-3.1-8b-instant";
 const allowedOrigin = process.env.ALLOWED_ORIGIN || "";
 const maxChatMessageLength = 1200;
 const maxContextLength = 1200;
-const maxTranslationItems = 40;
-const maxTranslationHtmlLength = 500;
+const maxTranslationItems = 25;
+const maxTranslationContentLength = 3000;
 
 const portfolioContext = `
 You are Godson's portfolio AI assistant.
@@ -19,6 +19,8 @@ You speak accurately about Godson Mugisha based on this profile:
 If something is not in the profile, say so plainly and avoid inventing details.
 Keep responses concise, helpful, and professional.
 `;
+
+const supportedChatLanguages = ["English", "French", "Kinyarwanda"];
 
 function getClient() {
   const apiKey = process.env.GROQ_API_KEY;
@@ -85,8 +87,12 @@ async function createChatCompletion(messages, options = {}) {
 
 async function handleChat(body, res) {
   const message = typeof body.message === "string" ? body.message.trim() : "";
-  const language = typeof body.language === "string" ? body.language.trim() : "English";
+  const requestedLanguage =
+    typeof body.language === "string" ? body.language.trim() : "English";
   const context = typeof body.context === "string" ? body.context.trim() : "";
+  const language = supportedChatLanguages.includes(requestedLanguage)
+    ? requestedLanguage
+    : "English";
 
   if (!message) {
     return sendJson(res, 400, { error: "Message is required." });
@@ -100,7 +106,13 @@ async function handleChat(body, res) {
     [
       {
         role: "system",
-        content: `${portfolioContext}\nReply in ${language} unless the user explicitly asks for another language.`,
+        content: `${portfolioContext}
+You must understand and respond clearly in these supported languages: English, French, and Kinyarwanda.
+Default to ${language} for this request unless the user explicitly asks for a different language.
+If the user writes in English, French, or Kinyarwanda, understand the request directly without asking them to switch languages.
+Keep the reply natural for the chosen language, and do not mix languages unless the user asks for that.
+If Kinyarwanda is requested or the user writes in Kinyarwanda, answer in Kinyarwanda only.
+Do not switch to Swahili when Kinyarwanda is requested.`,
       },
       ...(context
         ? [
@@ -138,12 +150,15 @@ async function handlePageTranslation(body, res) {
   const sanitizedItems = items
     .map((item) => ({
       id: typeof item.id === "string" ? item.id : "",
-      html:
-        typeof item.html === "string"
-          ? item.html.trim().slice(0, maxTranslationHtmlLength)
-          : "",
+      format: item.format === "text" ? "text" : "html",
+      content:
+        typeof item.content === "string"
+          ? item.content.trim().slice(0, maxTranslationContentLength)
+          : typeof item.html === "string"
+            ? item.html.trim().slice(0, maxTranslationContentLength)
+            : "",
     }))
-    .filter((item) => item.id && item.html);
+    .filter((item) => item.id && item.content);
 
   if (!sanitizedItems.length) {
     return sendJson(res, 400, { error: "No valid translation items were provided." });
@@ -154,7 +169,7 @@ async function handlePageTranslation(body, res) {
       {
         role: "system",
         content:
-          "Translate each HTML snippet into the requested language. Preserve HTML tags, order, numbers, URLs, emails, brand names, and technical terms where appropriate. Return JSON only.",
+          "Translate each item into the requested language. Items marked as html must preserve all HTML tags, structure, and order exactly. Items marked as text must return plain translated text only. Preserve numbers, URLs, emails, brand names, code syntax, and technical terms where appropriate. Return valid JSON only.",
       },
       {
         role: "user",
@@ -162,7 +177,12 @@ async function handlePageTranslation(body, res) {
           targetLanguage,
           items: sanitizedItems,
           outputFormat: {
-            items: [{ id: "same-as-input", translatedHtml: "translated html snippet" }],
+            items: [
+              {
+                id: "same-as-input",
+                translatedContent: "translated content matching the input format",
+              },
+            ],
           },
         }),
       },
@@ -174,7 +194,21 @@ async function handlePageTranslation(body, res) {
 
   try {
     const parsed = JSON.parse(raw);
-    const translatedItems = Array.isArray(parsed.items) ? parsed.items : [];
+    const translatedItems = Array.isArray(parsed.items)
+      ? parsed.items
+          .map((item) => ({
+            id: item?.id,
+            translatedContent:
+              typeof item?.translatedContent === "string"
+                ? item.translatedContent
+                : typeof item?.content === "string"
+                  ? item.content
+                  : typeof item?.translatedHtml === "string"
+                    ? item.translatedHtml
+                    : "",
+          }))
+          .filter((item) => item.id && item.translatedContent)
+      : [];
     return sendJson(res, 200, { items: translatedItems });
   } catch (error) {
     return sendJson(res, 502, {

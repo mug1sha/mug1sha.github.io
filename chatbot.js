@@ -82,14 +82,19 @@ const initChatbot = () => {
     const chatInput = document.getElementById('chat-input');
     const sendBtn = document.getElementById('send-btn');
     const qaButtons = document.querySelectorAll('.qa-btn');
-    const titleEl = document.getElementById('chatbot-title');
-    const statusEl = document.getElementById('chatbot-status');
-    const welcomeEl = document.getElementById('chatbot-welcome-message');
 
     if (!trigger || !windowEl || !chatBody || !chatInput) return;
 
     const getCurrentLang = () => document.documentElement.dataset.language || 'EN';
     const getCopy = () => chatUiCopy[getCurrentLang()] || chatUiCopy.EN;
+    const normalizeQuery = (input) => input
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '');
+    const countLanguageHits = (text, patterns) => {
+        const normalized = normalizeQuery(text);
+        return patterns.reduce((count, pattern) => count + (normalized.includes(pattern) ? 1 : 0), 0);
+    };
 
     const appendMessage = (sender, text) => {
         const msgDiv = document.createElement('div');
@@ -115,25 +120,100 @@ const initChatbot = () => {
 
     const getLocalResponse = (input) => {
         const copy = getCopy();
-        const query = input.toLowerCase();
+        const query = normalizeQuery(input);
 
-        if (query.includes('skill') || query.includes('tech') || query.includes('comp') || query.includes('ubumenyi')) {
+        if (
+            query.includes('skill') ||
+            query.includes('skills') ||
+            query.includes('tech') ||
+            query.includes('competence') ||
+            query.includes('competences') ||
+            query.includes('comp') ||
+            query.includes('ubumenyi') ||
+            query.includes('ushoboye') ||
+            query.includes('ushobor') ||
+            query.includes('competences de godson')
+        ) {
             return copy.fallback.skills;
         }
-        if (query.includes('project') || query.includes('work') || query.includes('projet') || query.includes('mushinga')) {
+        if (
+            query.includes('project') ||
+            query.includes('projects') ||
+            query.includes('work') ||
+            query.includes('projet') ||
+            query.includes('projets') ||
+            query.includes('mushinga') ||
+            query.includes('imishinga')
+        ) {
             return copy.fallback.projects;
         }
-        if (query.includes('contact') || query.includes('email') || query.includes('reach') || query.includes('contacter') || query.includes('twandik')) {
+        if (
+            query.includes('contact') ||
+            query.includes('email') ||
+            query.includes('reach') ||
+            query.includes('contacter') ||
+            query.includes('coordonnees') ||
+            query.includes('joindre') ||
+            query.includes('telephone') ||
+            query.includes('numero') ||
+            query.includes('twandik') ||
+            query.includes('waboneka') ||
+            query.includes('nabona nte') ||
+            query.includes('numero ya')
+        ) {
             return copy.fallback.contact;
         }
-        if (query.includes('hire') || query.includes('opportunit') || query.includes('akazi')) {
+        if (
+            query.includes('hire') ||
+            query.includes('opportunit') ||
+            query.includes('embauche') ||
+            query.includes('emploi') ||
+            query.includes('akazi') ||
+            query.includes('akazi') ||
+            query.includes('opportunite')
+        ) {
             return copy.fallback.hire;
         }
-        if (query.includes('hello') || query.includes('hi') || query.includes('bonjour') || query.includes('muraho')) {
+        if (
+            query.includes('hello') ||
+            query.includes('hi') ||
+            query.includes('hey') ||
+            query.includes('bonjour') ||
+            query.includes('salut') ||
+            query.includes('muraho') ||
+            query.includes('amakuru')
+        ) {
             return copy.fallback.greeting;
         }
 
         return copy.fallback.default;
+    };
+
+    const shouldUseLocalReply = (message, aiResponse) => {
+        const lang = getCurrentLang();
+        if (!aiResponse) return true;
+
+        if (lang === 'RW') {
+            const rwSignals = ['muraho', 'godson ni', 'ni full stack developer', 'ubumenyi', 'imishinga', 'wamwandikira', 'umutekano', 'amahirwe'];
+            const swSignals = ['mhandisi', 'mifumo', 'usalama wa', 'uwezo', 'majukwaa', 'inaweza', 'kwa ', 'yake', 'kampuni', 'kompyuta'];
+
+            const rwScore = countLanguageHits(aiResponse, rwSignals);
+            const swScore = countLanguageHits(aiResponse, swSignals);
+
+            return rwScore === 0 || swScore > rwScore;
+        }
+
+        if (lang === 'FR') {
+            const frSignals = ['bonjour', 'competences', 'projets', 'contacter', 'cybersecurite', 'opportunites', 'developpeur', 'ingenieur'];
+            const enSignals = ['skills', 'projects', 'contact', 'security', 'developer', 'engineer'];
+
+            const frScore = countLanguageHits(aiResponse, frSignals);
+            const enScore = countLanguageHits(aiResponse, enSignals);
+
+            return frScore === 0 && enScore > 0;
+        }
+
+        return false;
     };
 
     const getPortfolioContext = () => {
@@ -168,21 +248,13 @@ const initChatbot = () => {
         return data.reply?.trim();
     };
 
-    const refreshUiLanguage = () => {
+    const syncQuickActionQueries = () => {
         const copy = getCopy();
-
-        if (titleEl) titleEl.textContent = copy.title;
-        if (statusEl) statusEl.textContent = copy.status;
-        if (chatInput) chatInput.placeholder = copy.placeholder;
-        if (welcomeEl && welcomeEl.dataset.chatWelcome === 'true') {
-            welcomeEl.textContent = copy.welcome;
-        }
 
         qaButtons.forEach(btn => {
             const intent = btn.dataset.intent;
             const config = copy.quickActions[intent];
             if (!config) return;
-            btn.textContent = config.label;
             btn.dataset.query = config.query;
         });
     };
@@ -201,7 +273,7 @@ const initChatbot = () => {
         try {
             const aiResponse = await requestGroqResponse(text);
             removeTypingIndicator();
-            appendMessage('ai', aiResponse || getCopy().errors.generic);
+            appendMessage('ai', shouldUseLocalReply(text, aiResponse) ? getLocalResponse(text) : (aiResponse || getCopy().errors.generic));
         } catch (error) {
             console.warn(getCopy().errors.api, error);
             removeTypingIndicator();
@@ -239,8 +311,8 @@ const initChatbot = () => {
         });
     });
 
-    document.addEventListener('portfolio-languagechange', refreshUiLanguage);
-    refreshUiLanguage();
+    document.addEventListener('portfolio-languagechange', syncQuickActionQueries);
+    syncQuickActionQueries();
 };
 
 if (document.readyState === 'loading') {
