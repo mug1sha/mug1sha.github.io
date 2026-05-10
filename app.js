@@ -30,8 +30,8 @@ const staticTranslations = {
         git_contributions: 'Daily Open Source Contributions',
         services_subtitle: 'Hacker-mindset applied to enterprise systems.',
         gallery_kicker: 'VISUAL ARCHIVE',
-        gallery_title: 'Cinematic Holographic Image Wall',
-        gallery_description: 'A premium floating image space where portraits and visual moments feel suspended inside a futuristic glass-and-light environment.',
+        gallery_title: 'Moments Captured, Stories Told.',
+        gallery_description: 'A cinematic horizontal lineup where each image drifts through holographic light, bends through depth, and sharpens into focus as it reaches center stage.',
         about_bio: '`Passionate digital creator blending code and cybersecurity to build smart, secure, and high-impact solutions. Focused on results, innovation, and resilience.`',
         download_resume: 'Download Resume',
         find_me_on: 'Find me on:',
@@ -63,8 +63,8 @@ const staticTranslations = {
         git_contributions: 'Contributions open source quotidiennes',
         services_subtitle: 'Un état d’esprit hacker appliqué aux systèmes d’entreprise.',
         gallery_kicker: 'ARCHIVE VISUELLE',
-        gallery_title: 'Mur d’images holographique cinématographique',
-        gallery_description: 'Un espace visuel premium où portraits et instants flottent dans un environnement futuriste de verre, de lumière et de profondeur.',
+        gallery_title: 'Moments capturés, histoires racontées.',
+        gallery_description: 'Une composition horizontale cinématographique où chaque image traverse une lumière holographique, prend de la profondeur et devient nette en arrivant au centre.',
         about_bio: '`Créateur numérique passionné, j’unis code et cybersécurité pour construire des solutions intelligentes, sûres et à fort impact. Axé sur les résultats, l’innovation et la résilience.`',
         download_resume: 'Télécharger le CV',
         find_me_on: 'Retrouvez-moi sur :',
@@ -96,8 +96,8 @@ const staticTranslations = {
         git_contributions: 'Imisanzu ya open source ya buri munsi',
         services_subtitle: 'Imitekerereze ya hacker ikoreshwa muri sisitemu z\'ibigo.',
         gallery_kicker: 'VISUAL ARCHIVE',
-        gallery_title: 'Urukuta rw\'amashusho rwa holographic',
-        gallery_description: 'Ahantu heza herekana amashusho asa n\'ayireremba mu kirere cy\'umucyo, ikirahure n\'ubujyakuzimu bwa futuristic.',
+        gallery_title: 'Ibihe byafashwe, inkuru zivugwa.',
+        gallery_description: 'Umurongo w\'amashusho wa sinema aho buri foto inyura mu mucyo wa holographic, igafata ubujyakuzimu kandi ikagaragara neza iyo igeze hagati.',
         about_bio: '`Umuremyi wa digital ukunda guhuza code na cybersecurity kugira ngo yubake ibisubizo byiza, bifite umutekano kandi bifite ingaruka nziza. Nibanda ku musaruro, udushya no gukomera.`',
         download_resume: 'Kuramo CV',
         find_me_on: 'Nsange hano:',
@@ -774,6 +774,12 @@ const initPortfolio = () => {
         const galleryStage = document.getElementById('gallery-stage');
         const galleryTrack = document.getElementById('gallery-track');
         const galleryCards = Array.from(document.querySelectorAll('.gallery-panel'));
+        const galleryDots = document.getElementById('gallery-dots');
+        const galleryCurrentIndex = document.getElementById('gallery-current-index');
+        const galleryTotalCount = document.getElementById('gallery-total-count');
+        const galleryProgressBar = document.getElementById('gallery-progress-bar');
+        const galleryRunwayPrev = document.getElementById('gallery-runway-prev');
+        const galleryRunwayNext = document.getElementById('gallery-runway-next');
         const galleryLightbox = document.getElementById('gallery-lightbox');
         const galleryLightboxImage = document.getElementById('gallery-lightbox-image');
         const galleryLightboxCaption = document.getElementById('gallery-lightbox-caption');
@@ -783,6 +789,36 @@ const initPortfolio = () => {
         const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         let activeGalleryIndex = 0;
         let galleryTicking = false;
+        let galleryCurrentX = 0;
+        let galleryTargetX = 0;
+        let galleryAnimationFrame = 0;
+
+        const galleryNavDots = galleryDots ? galleryCards.map((_, index) => {
+            const dot = document.createElement('button');
+            dot.type = 'button';
+            dot.className = 'gallery-dot';
+            dot.setAttribute('aria-label', `Focus gallery image ${index + 1}`);
+            dot.addEventListener('click', () => focusGalleryIndex(index));
+            galleryDots.appendChild(dot);
+            return dot;
+        }) : [];
+
+        if (galleryTotalCount) {
+            galleryTotalCount.textContent = String(galleryCards.length).padStart(2, '0');
+        }
+
+        const syncGalleryHud = (index) => {
+            const safeIndex = ((index % galleryCards.length) + galleryCards.length) % galleryCards.length;
+            if (galleryCurrentIndex) {
+                galleryCurrentIndex.textContent = String(safeIndex + 1).padStart(2, '0');
+            }
+            if (galleryProgressBar) {
+                galleryProgressBar.style.width = `${((safeIndex + 1) / galleryCards.length) * 100}%`;
+            }
+            galleryNavDots.forEach((dot, dotIndex) => {
+                dot.classList.toggle('is-active', dotIndex === safeIndex);
+            });
+        };
 
         const updateLightbox = (index) => {
             const safeIndex = ((index % galleryCards.length) + galleryCards.length) % galleryCards.length;
@@ -796,6 +832,35 @@ const initPortfolio = () => {
                 const label = card.querySelector('.gallery-image-label')?.textContent?.trim() || `Image ${safeIndex + 1}`;
                 galleryLightboxCaption.textContent = `${label} · ${safeIndex + 1} / ${galleryCards.length}`;
             }
+        };
+
+        const focusGalleryIndex = (index) => {
+            const safeIndex = ((index % galleryCards.length) + galleryCards.length) % galleryCards.length;
+            const targetCard = galleryCards[safeIndex];
+            if (!targetCard || !galleryStage || !galleryTrack) return;
+
+            const mobileMode = window.innerWidth <= 768;
+            if (mobileMode) {
+                const targetLeft = targetCard.offsetLeft - ((galleryStage.clientWidth - targetCard.offsetWidth) / 2);
+                galleryStage.scrollTo({
+                    left: Math.max(targetLeft, 0),
+                    behavior: reduceMotion ? 'auto' : 'smooth'
+                });
+                return;
+            }
+
+            const maxTranslate = Math.max(galleryTrack.scrollWidth - galleryStage.clientWidth, 0);
+            const centeredTrackOffset = targetCard.offsetLeft + (targetCard.offsetWidth / 2) - (galleryStage.clientWidth / 2);
+            const clampedOffset = Math.min(Math.max(centeredTrackOffset, 0), maxTranslate);
+            const scrollDistance = Math.max(galleryScrollZone.offsetHeight - window.innerHeight, 1);
+            const zoneTop = window.scrollY + galleryScrollZone.getBoundingClientRect().top;
+            const progress = maxTranslate === 0 ? 0 : clampedOffset / maxTranslate;
+            const targetScrollTop = zoneTop + (scrollDistance * progress);
+
+            window.scrollTo({
+                top: targetScrollTop,
+                behavior: reduceMotion ? 'auto' : 'smooth'
+            });
         };
 
         const openGalleryLightbox = (index) => {
@@ -816,24 +881,34 @@ const initPortfolio = () => {
         const showNextImage = () => updateLightbox(activeGalleryIndex + 1);
         const showPrevImage = () => updateLightbox(activeGalleryIndex - 1);
 
-        const updateGalleryRunway = () => {
+        const renderGalleryRunway = () => {
+            galleryAnimationFrame = 0;
             galleryTicking = false;
             if (!galleryScrollZone || !galleryStage || !galleryTrack || !galleryCards.length) return;
 
             const mobileMode = window.innerWidth <= 768;
             const stageRect = galleryStage.getBoundingClientRect();
             const stageCenter = stageRect.left + stageRect.width / 2;
-            let trackOffset = mobileMode ? -galleryStage.scrollLeft : 0;
+            let trackOffset;
 
-            if (!mobileMode && !reduceMotion) {
+            if (!mobileMode) {
                 const zoneRect = galleryScrollZone.getBoundingClientRect();
                 const scrollDistance = Math.max(galleryScrollZone.offsetHeight - window.innerHeight, 1);
                 const rawProgress = (-zoneRect.top) / scrollDistance;
                 const progress = Math.min(Math.max(rawProgress, 0), 1);
                 const maxTranslate = Math.max(galleryTrack.scrollWidth - galleryStage.clientWidth, 0);
-                trackOffset = -maxTranslate * progress;
+                galleryTargetX = -maxTranslate * progress;
+                if (reduceMotion) {
+                    galleryCurrentX = galleryTargetX;
+                } else {
+                    galleryCurrentX += (galleryTargetX - galleryCurrentX) * 0.11;
+                }
+                trackOffset = galleryCurrentX;
                 galleryTrack.style.transform = `translate3d(${trackOffset}px, 0, 0)`;
             } else {
+                trackOffset = -galleryStage.scrollLeft;
+                galleryCurrentX = trackOffset;
+                galleryTargetX = trackOffset;
                 galleryTrack.style.transform = '';
             }
 
@@ -843,17 +918,25 @@ const initPortfolio = () => {
             galleryCards.forEach((card, index) => {
                 const cardCenter = stageRect.left + card.offsetLeft + card.offsetWidth / 2 + trackOffset;
                 const distance = cardCenter - stageCenter;
-                const normalized = Math.min(Math.abs(distance) / (stageRect.width * 0.5), 1.35);
+                const normalized = Math.min(Math.abs(distance) / (stageRect.width * 0.48), 1.35);
                 const direction = distance >= 0 ? 1 : -1;
-                const rotateY = mobileMode ? 0 : direction * Math.min(normalized * 22, 22);
-                const scale = mobileMode ? 1 : 1.08 - Math.min(normalized * 0.2, 0.24);
-                const depth = mobileMode ? 0 : 110 - Math.min(normalized * 180, 180);
-                const opacity = 1 - Math.min(normalized * 0.18, 0.24);
+                const rotateY = mobileMode ? 0 : direction * Math.min(normalized * 30, 30);
+                const scale = mobileMode ? 1 : 1.1 - Math.min(normalized * 0.28, 0.3);
+                const depth = mobileMode ? 0 : 120 - Math.min(Math.pow(normalized, 1.08) * 250, 250);
+                const curveDrop = mobileMode ? 0 : Math.min(Math.pow(normalized, 1.15) * 92, 92);
+                const sideShift = mobileMode ? 0 : direction * Math.min(Math.pow(normalized, 1.1) * 22, 22);
+                const opacity = mobileMode ? 1 : 1 - Math.min(normalized * 0.34, 0.42);
+                const brightness = mobileMode ? 1 : 1 - Math.min(normalized * 0.22, 0.24);
+                const saturation = mobileMode ? 1 : 1 - Math.min(normalized * 0.18, 0.22);
 
                 card.style.setProperty('--rotate-factor', `${rotateY}deg`);
-                card.style.setProperty('--scale-factor', `${Math.max(scale, 0.84)}`);
+                card.style.setProperty('--scale-factor', `${Math.max(scale, 0.8)}`);
                 card.style.setProperty('--depth-shift', `${depth}px`);
-                card.style.opacity = `${opacity}`;
+                card.style.setProperty('--curve-drop', `${curveDrop}px`);
+                card.style.setProperty('--curve-slide', `${sideShift}px`);
+                card.style.setProperty('--panel-opacity', `${opacity}`);
+                card.style.setProperty('--image-brightness', `${brightness}`);
+                card.style.setProperty('--panel-saturation', `${Math.max(saturation, 0.82)}`);
 
                 if (Math.abs(distance) < nearestDistance) {
                     nearestDistance = Math.abs(distance);
@@ -864,13 +947,20 @@ const initPortfolio = () => {
             activeGalleryIndex = nearestIndex;
             galleryCards.forEach((card, index) => {
                 card.classList.toggle('is-active', index === nearestIndex);
+                card.classList.toggle('is-near', Math.abs(index - nearestIndex) === 1);
+                card.classList.toggle('is-far', Math.abs(index - nearestIndex) >= 2);
             });
+            syncGalleryHud(nearestIndex);
+
+            if (!reduceMotion && !mobileMode && Math.abs(galleryTargetX - galleryCurrentX) > 0.5) {
+                requestGalleryRunwayUpdate();
+            }
         };
 
         const requestGalleryRunwayUpdate = () => {
-            if (galleryTicking) return;
+            if (galleryTicking || galleryAnimationFrame) return;
             galleryTicking = true;
-            window.requestAnimationFrame(updateGalleryRunway);
+            galleryAnimationFrame = window.requestAnimationFrame(renderGalleryRunway);
         };
 
         galleryCards.forEach((card, index) => {
@@ -908,6 +998,12 @@ const initPortfolio = () => {
             target.addEventListener('click', closeGalleryLightbox);
         });
 
+        if (galleryRunwayPrev) {
+            galleryRunwayPrev.addEventListener('click', () => focusGalleryIndex(activeGalleryIndex - 1));
+        }
+        if (galleryRunwayNext) {
+            galleryRunwayNext.addEventListener('click', () => focusGalleryIndex(activeGalleryIndex + 1));
+        }
         if (galleryPrevBtn) galleryPrevBtn.addEventListener('click', showPrevImage);
         if (galleryNextBtn) galleryNextBtn.addEventListener('click', showNextImage);
 
@@ -916,6 +1012,7 @@ const initPortfolio = () => {
         }
         window.addEventListener('scroll', requestGalleryRunwayUpdate, { passive: true });
         window.addEventListener('resize', requestGalleryRunwayUpdate);
+        syncGalleryHud(activeGalleryIndex);
         requestGalleryRunwayUpdate();
 
         window.addEventListener('keydown', (event) => {
