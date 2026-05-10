@@ -29,6 +29,9 @@ const staticTranslations = {
         work_subtitle: 'Selected programming & automation projects...',
         git_contributions: 'Daily Open Source Contributions',
         services_subtitle: 'Hacker-mindset applied to enterprise systems.',
+        gallery_kicker: 'VISUAL ARCHIVE',
+        gallery_title: 'Cinematic Holographic Image Wall',
+        gallery_description: 'A premium floating image space where portraits and visual moments feel suspended inside a futuristic glass-and-light environment.',
         about_bio: '`Passionate digital creator blending code and cybersecurity to build smart, secure, and high-impact solutions. Focused on results, innovation, and resilience.`',
         download_resume: 'Download Resume',
         find_me_on: 'Find me on:',
@@ -59,6 +62,9 @@ const staticTranslations = {
         work_subtitle: 'Projets sélectionnés en programmation et automatisation...',
         git_contributions: 'Contributions open source quotidiennes',
         services_subtitle: 'Un état d’esprit hacker appliqué aux systèmes d’entreprise.',
+        gallery_kicker: 'ARCHIVE VISUELLE',
+        gallery_title: 'Mur d’images holographique cinématographique',
+        gallery_description: 'Un espace visuel premium où portraits et instants flottent dans un environnement futuriste de verre, de lumière et de profondeur.',
         about_bio: '`Créateur numérique passionné, j’unis code et cybersécurité pour construire des solutions intelligentes, sûres et à fort impact. Axé sur les résultats, l’innovation et la résilience.`',
         download_resume: 'Télécharger le CV',
         find_me_on: 'Retrouvez-moi sur :',
@@ -89,6 +95,9 @@ const staticTranslations = {
         work_subtitle: 'Imishinga yatoranyijwe ya programming na automation...',
         git_contributions: 'Imisanzu ya open source ya buri munsi',
         services_subtitle: 'Imitekerereze ya hacker ikoreshwa muri sisitemu z\'ibigo.',
+        gallery_kicker: 'VISUAL ARCHIVE',
+        gallery_title: 'Urukuta rw\'amashusho rwa holographic',
+        gallery_description: 'Ahantu heza herekana amashusho asa n\'ayireremba mu kirere cy\'umucyo, ikirahure n\'ubujyakuzimu bwa futuristic.',
         about_bio: '`Umuremyi wa digital ukunda guhuza code na cybersecurity kugira ngo yubake ibisubizo byiza, bifite umutekano kandi bifite ingaruka nziza. Nibanda ku musaruro, udushya no gukomera.`',
         download_resume: 'Kuramo CV',
         find_me_on: 'Nsange hano:',
@@ -759,7 +768,173 @@ const initPortfolio = () => {
         }
     } catch (e) { console.error("Theme/Lang failed", e); }
 
-    /* --- 5. Honors Overlay --- */
+    /* --- 5. Gallery --- */
+    try {
+        const galleryScrollZone = document.getElementById('gallery-scroll-zone');
+        const galleryStage = document.getElementById('gallery-stage');
+        const galleryTrack = document.getElementById('gallery-track');
+        const galleryCards = Array.from(document.querySelectorAll('.gallery-panel'));
+        const galleryLightbox = document.getElementById('gallery-lightbox');
+        const galleryLightboxImage = document.getElementById('gallery-lightbox-image');
+        const galleryLightboxCaption = document.getElementById('gallery-lightbox-caption');
+        const galleryPrevBtn = document.getElementById('gallery-lightbox-prev');
+        const galleryNextBtn = document.getElementById('gallery-lightbox-next');
+        const modalCloseTargets = Array.from(document.querySelectorAll('[data-gallery-close]'));
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        let activeGalleryIndex = 0;
+        let galleryTicking = false;
+
+        const updateLightbox = (index) => {
+            const safeIndex = ((index % galleryCards.length) + galleryCards.length) % galleryCards.length;
+            const card = galleryCards[safeIndex];
+            if (!card || !galleryLightboxImage) return;
+
+            activeGalleryIndex = safeIndex;
+            galleryLightboxImage.src = card.dataset.image || '';
+            galleryLightboxImage.alt = card.dataset.alt || `Gallery image ${safeIndex + 1}`;
+            if (galleryLightboxCaption) {
+                const label = card.querySelector('.gallery-image-label')?.textContent?.trim() || `Image ${safeIndex + 1}`;
+                galleryLightboxCaption.textContent = `${label} · ${safeIndex + 1} / ${galleryCards.length}`;
+            }
+        };
+
+        const openGalleryLightbox = (index) => {
+            if (!galleryLightbox) return;
+            updateLightbox(index);
+            galleryLightbox.classList.add('is-open');
+            galleryLightbox.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        };
+
+        const closeGalleryLightbox = () => {
+            if (!galleryLightbox) return;
+            galleryLightbox.classList.remove('is-open');
+            galleryLightbox.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        };
+
+        const showNextImage = () => updateLightbox(activeGalleryIndex + 1);
+        const showPrevImage = () => updateLightbox(activeGalleryIndex - 1);
+
+        const updateGalleryRunway = () => {
+            galleryTicking = false;
+            if (!galleryScrollZone || !galleryStage || !galleryTrack || !galleryCards.length) return;
+
+            const mobileMode = window.innerWidth <= 768;
+            const stageRect = galleryStage.getBoundingClientRect();
+            const stageCenter = stageRect.left + stageRect.width / 2;
+            let trackOffset = mobileMode ? -galleryStage.scrollLeft : 0;
+
+            if (!mobileMode && !reduceMotion) {
+                const zoneRect = galleryScrollZone.getBoundingClientRect();
+                const scrollDistance = Math.max(galleryScrollZone.offsetHeight - window.innerHeight, 1);
+                const rawProgress = (-zoneRect.top) / scrollDistance;
+                const progress = Math.min(Math.max(rawProgress, 0), 1);
+                const maxTranslate = Math.max(galleryTrack.scrollWidth - galleryStage.clientWidth, 0);
+                trackOffset = -maxTranslate * progress;
+                galleryTrack.style.transform = `translate3d(${trackOffset}px, 0, 0)`;
+            } else {
+                galleryTrack.style.transform = '';
+            }
+
+            let nearestIndex = 0;
+            let nearestDistance = Number.POSITIVE_INFINITY;
+
+            galleryCards.forEach((card, index) => {
+                const cardCenter = stageRect.left + card.offsetLeft + card.offsetWidth / 2 + trackOffset;
+                const distance = cardCenter - stageCenter;
+                const normalized = Math.min(Math.abs(distance) / (stageRect.width * 0.5), 1.35);
+                const direction = distance >= 0 ? 1 : -1;
+                const rotateY = mobileMode ? 0 : direction * Math.min(normalized * 22, 22);
+                const scale = mobileMode ? 1 : 1.08 - Math.min(normalized * 0.2, 0.24);
+                const depth = mobileMode ? 0 : 110 - Math.min(normalized * 180, 180);
+                const opacity = 1 - Math.min(normalized * 0.18, 0.24);
+
+                card.style.setProperty('--rotate-factor', `${rotateY}deg`);
+                card.style.setProperty('--scale-factor', `${Math.max(scale, 0.84)}`);
+                card.style.setProperty('--depth-shift', `${depth}px`);
+                card.style.opacity = `${opacity}`;
+
+                if (Math.abs(distance) < nearestDistance) {
+                    nearestDistance = Math.abs(distance);
+                    nearestIndex = index;
+                }
+            });
+
+            activeGalleryIndex = nearestIndex;
+            galleryCards.forEach((card, index) => {
+                card.classList.toggle('is-active', index === nearestIndex);
+            });
+        };
+
+        const requestGalleryRunwayUpdate = () => {
+            if (galleryTicking) return;
+            galleryTicking = true;
+            window.requestAnimationFrame(updateGalleryRunway);
+        };
+
+        galleryCards.forEach((card, index) => {
+            card.addEventListener('click', () => {
+                openGalleryLightbox(index);
+            });
+
+            card.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    openGalleryLightbox(index);
+                }
+            });
+
+            if (!reduceMotion) {
+                card.addEventListener('mousemove', (event) => {
+                    const bounds = card.getBoundingClientRect();
+                    const x = (event.clientX - bounds.left) / bounds.width;
+                    const y = (event.clientY - bounds.top) / bounds.height;
+                    const rotateY = (x - 0.5) * 12;
+                    const rotateX = (0.5 - y) * 12;
+
+                    card.style.setProperty('--tilt-x', `${rotateX.toFixed(2)}deg`);
+                    card.style.setProperty('--tilt-y', `${rotateY.toFixed(2)}deg`);
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    card.style.setProperty('--tilt-x', '0deg');
+                    card.style.setProperty('--tilt-y', '0deg');
+                });
+            }
+        });
+
+        modalCloseTargets.forEach((target) => {
+            target.addEventListener('click', closeGalleryLightbox);
+        });
+
+        if (galleryPrevBtn) galleryPrevBtn.addEventListener('click', showPrevImage);
+        if (galleryNextBtn) galleryNextBtn.addEventListener('click', showNextImage);
+
+        if (galleryStage) {
+            galleryStage.addEventListener('scroll', requestGalleryRunwayUpdate, { passive: true });
+        }
+        window.addEventListener('scroll', requestGalleryRunwayUpdate, { passive: true });
+        window.addEventListener('resize', requestGalleryRunwayUpdate);
+        requestGalleryRunwayUpdate();
+
+        window.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                closeGalleryLightbox();
+            }
+
+            if (galleryLightbox?.classList.contains('is-open')) {
+                if (event.key === 'ArrowRight') {
+                    showNextImage();
+                }
+                if (event.key === 'ArrowLeft') {
+                    showPrevImage();
+                }
+            }
+        });
+    } catch (e) { console.error("Gallery failed", e); }
+
+    /* --- 6. Honors Overlay --- */
     try {
         const awardsBtn = document.getElementById('awards-btn');
         const awardsOverlay = document.getElementById('awards-overlay');
@@ -778,13 +953,30 @@ const initPortfolio = () => {
         }
     } catch (e) { console.error("Honors failed", e); }
 
-    /* --- 6. Stats & Extras --- */
+    /* --- 7. Stats & Extras --- */
     const visitorCountEl = document.getElementById('visitor-count');
     if (visitorCountEl) {
         fetch('https://api.counterapi.dev/v1/mug1sha-portfolio/visits/up')
             .then(res => res.json())
             .then(data => { visitorCountEl.textContent = data.count.toLocaleString(); })
             .catch(() => { visitorCountEl.textContent = 'Active'; });
+    }
+
+    const githubGraphWrapper = document.querySelector('.github-graph-wrapper');
+    const githubChart = document.querySelector('.github-chart');
+    const syncGithubGraphToLatest = () => {
+        if (!githubGraphWrapper || !githubChart) return;
+        if (window.innerWidth > 768) return;
+
+        const maxScrollLeft = githubGraphWrapper.scrollWidth - githubGraphWrapper.clientWidth;
+        githubGraphWrapper.scrollLeft = Math.max(maxScrollLeft, 0);
+    };
+
+    if (githubGraphWrapper && githubChart) {
+        window.addEventListener('load', syncGithubGraphToLatest);
+        window.addEventListener('resize', syncGithubGraphToLatest);
+        githubChart.addEventListener('load', syncGithubGraphToLatest);
+        setTimeout(syncGithubGraphToLatest, 250);
     }
 };
 

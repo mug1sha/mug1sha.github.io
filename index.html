@@ -493,29 +493,187 @@
 
     <section id="gallery" class="section gallery-section">
         <div class="container">
-            <div class="section-header reveal-skill">
-                <small class="section-title bullet-title" data-i18n="nav_gallery">Gallery /></small>
-            </div>
-            <div class="gallery-wrapper mt-5">
-                <div class="gallery-nav nav-prev"><</div>
-                <div class="gallery-grid" id="gallery-carousel">
-                    <div class="gallery-item reveal-skill delay-1">
-                        <img src="img/MyImages/Image3.png" alt="Gallery Image">
+            <div class="gallery-shell">
+                <div class="gallery-ambient gallery-ambient-a" aria-hidden="true"></div>
+                <div class="gallery-ambient gallery-ambient-b" aria-hidden="true"></div>
+                <div class="gallery-grid-texture" aria-hidden="true"></div>
+
+                <div class="section-header reveal-skill gallery-header">
+                    <div class="gallery-headline">
+                        <span class="gallery-kicker" data-i18n="gallery_kicker">VISUAL ARCHIVE</span>
+                        <small class="section-title bullet-title" data-i18n="nav_gallery">Gallery /></small>
                     </div>
-                    <div class="gallery-item reveal-skill delay-2">
-                        <img src="img/MyImages/image4.jpeg" alt="Gallery Image">
-                    </div>
-                    <div class="gallery-item reveal-skill delay-3">
-                        <img src="img/MyImages/Me.jpg" alt="Gallery Image">
-                    </div>
-                    <div class="gallery-item reveal-skill delay-4">
-                        <img src="img/MyImages/mee.png" alt="Gallery Image">
-                    </div>
-                    <div class="gallery-item reveal-skill delay-5">
-                        <img src="img/MyImages/Mugisha Godson_Photo.jpg" alt="Gallery Image">
+                    <h2 class="gallery-title" data-i18n="gallery_title">Cinematic Holographic Image Runway</h2>
+                    <p class="gallery-description" data-i18n="gallery_description">
+                        A futuristic horizontal image strip where portraits drift through space, glow with holographic light, and rotate toward the viewer as you scroll.
+                    </p>
+                </div>
+
+                <div class="gallery-scroll-zone mt-5" id="gallery-scroll-zone">
+                    <div class="gallery-stage" id="gallery-stage">
+                        <div class="gallery-track" id="gallery-track">
+                    <figure
+                        class="gallery-panel reveal-skill delay-1"
+                        tabindex="0"
+                        role="button"
+                        aria-label="Open gallery image 1"
+                        data-image="./img/MyImages/Image3.png"
+                        data-alt="Godson gallery portrait 1"
+                    >
+                        <div class="gallery-scanlines" aria-hidden="true"></div>
+                        <div class="gallery-light-sweep" aria-hidden="true"></div>
+                        <div class="gallery-corners" aria-hidden="true"></div>
+                        <div class="gallery-panel-top" aria-hidden="true">
+                            <span class="gallery-status">LIVE</span>
+                            <span class="gallery-hud">FRAME_01</span>
+                        </div>
+                        <div class="gallery-image-frame">
+                            <img src="./img/MyImages/Image3.png" alt="Godson gallery portrait 1" loading="lazy">
+                        </div>
+                        <div class="gallery-image-meta">
+                            <span class="gallery-image-label">Portrait Node</span>
+                            <span class="gallery-image-code">001</span>
+                        </div>
+                    </figure>
+
+                    <figure
+                        class="gallery-panel reveal-skill delay-2"
+                        tabindex="0"
+                        role="button"
+                        aria-label="Open gallery image 2"
+                        data-image="./img/MyImages/image4.jpeg"
+                        data-alt="Godson gallery portrait 2"
+                    >
+                        <div class="gallery-scanlines" aria-hidden="true"></div>
+                        <div class="gallery-light-sweep" aria-hidden="true"></div>
+                        <div class="gallery-corners" aria-hidden="true"></div>
+                        <div class="gallery-panel-top" aria-hidden="true">
+                            <span class="gallery-status">LIVE</span>
+                            <span class="gallery-hud">FRAME_02</span>
+                        </div>
+                        <div class="gallery-image-frame">
+                            <img src="./img/MyImages/image4.jpeg" alt="Godson gallery portrait 2" loading="lazy">
+                        </div>
+                        <div class="gallery-image-meta">
+                            <span class="gallery-image-label">Light Capture</span>
+                            <span class="gallery-image-code">002</span>
+                        </div>
+                    </figure>
+
+                    <figure
+                        class="gallery-panel reveal-skill delay-3"
+                        tabindex="0"
+                        role="button"
+                        aria-label="Open gallery image 3"
+                        data-image="./img/MyImages/Me.jpg"
+                        data-alt="Godson gallery portrait 3"
+                    >
+                        <div class="gallery-scanlines" aria-hidden="true"></div>
+                        <div class="gallery-light-sweep" aria-hidden="true"></div>
+                        <div class="gallery-corners" aria-hidden="true"></div>
+                        <div class="gallery-panel-top" aria-hidden="true">
+                            <span class="gallery-status">LIVE</span>
+                            <span class="gallery-hud">FRAME_03</span>
+                        </div>
+                        <div class="gallery-image-frame">
+                            <img src="./img/MyImages/Me.jpg" alt="Godson gallery portrait 3" loading="lazy">
+                        </div>
+                        <div class="gallery-image-meta">
+                            <span class="gallery-image-label">Studio Echo</span>
+                            <span class="gallery-image-code">003</span>
+                        </div>
+                    </figure>
+
+                    <figure
+                        class="gallery-panel reveal-skill delay-4"
+                        tabindex="0"
+                        role="button"
+                        aria-label="Open gallery image 4"
+                        data-image="./img/MyImages/mee.png"
+                        data-alt="Godson gallery portrait 4"
+                    >
+                        <div class="gallery-scanlines" aria-hidden="true"></div>
+                        <div class="gallery-light-sweep" aria-hidden="true"></div>
+                        <div class="gallery-corners" aria-hidden="true"></div>
+                        <div class="gallery-panel-top" aria-hidden="true">
+                            <span class="gallery-status">LIVE</span>
+                            <span class="gallery-hud">FRAME_04</span>
+                        </div>
+                        <div class="gallery-image-frame">
+                            <img src="./img/MyImages/mee.png" alt="Godson gallery portrait 4" loading="lazy">
+                        </div>
+                        <div class="gallery-image-meta">
+                            <span class="gallery-image-label">Signal Frame</span>
+                            <span class="gallery-image-code">004</span>
+                        </div>
+                    </figure>
+
+                    <figure
+                        class="gallery-panel reveal-skill delay-5"
+                        tabindex="0"
+                        role="button"
+                        aria-label="Open gallery image 5"
+                        data-image="./img/MyImages/Mugisha Godson_Photo.jpg"
+                        data-alt="Godson gallery portrait 5"
+                    >
+                        <div class="gallery-scanlines" aria-hidden="true"></div>
+                        <div class="gallery-light-sweep" aria-hidden="true"></div>
+                        <div class="gallery-corners" aria-hidden="true"></div>
+                        <div class="gallery-panel-top" aria-hidden="true">
+                            <span class="gallery-status">LIVE</span>
+                            <span class="gallery-hud">FRAME_05</span>
+                        </div>
+                        <div class="gallery-image-frame">
+                            <img src="./img/MyImages/Mugisha Godson_Photo.jpg" alt="Godson gallery portrait 5" loading="lazy">
+                        </div>
+                        <div class="gallery-image-meta">
+                            <span class="gallery-image-label">Primary Portrait</span>
+                            <span class="gallery-image-code">005</span>
+                        </div>
+                    </figure>
+
+                    <figure
+                        class="gallery-panel reveal-skill delay-5"
+                        tabindex="0"
+                        role="button"
+                        aria-label="Open gallery image 6"
+                        data-image="./img/MyImages/Image3.png"
+                        data-alt="Godson gallery portrait 6"
+                    >
+                        <div class="gallery-scanlines" aria-hidden="true"></div>
+                        <div class="gallery-light-sweep" aria-hidden="true"></div>
+                        <div class="gallery-corners" aria-hidden="true"></div>
+                        <div class="gallery-panel-top" aria-hidden="true">
+                            <span class="gallery-status">LIVE</span>
+                            <span class="gallery-hud">FRAME_06</span>
+                        </div>
+                        <div class="gallery-image-frame">
+                            <img src="./img/MyImages/Image3.png" alt="Godson gallery portrait 6" loading="lazy">
+                        </div>
+                        <div class="gallery-image-meta">
+                            <span class="gallery-image-label">Visual Loop</span>
+                            <span class="gallery-image-code">006</span>
+                        </div>
+                    </figure>
+                        </div>
                     </div>
                 </div>
-                <div class="gallery-nav nav-next">></div>
+
+                <div class="gallery-lightbox" id="gallery-lightbox" aria-hidden="true">
+                    <div class="gallery-lightbox-backdrop" data-gallery-close></div>
+                    <div class="gallery-lightbox-dialog" role="dialog" aria-modal="true" aria-labelledby="gallery-lightbox-caption">
+                        <button type="button" class="gallery-lightbox-close" aria-label="Close image preview" data-gallery-close>&times;</button>
+                        <button type="button" class="gallery-lightbox-nav gallery-lightbox-prev" aria-label="Previous image" id="gallery-lightbox-prev">&#10094;</button>
+                        <div class="gallery-lightbox-visual">
+                            <img id="gallery-lightbox-image" src="" alt="">
+                            <div class="gallery-lightbox-reflection" aria-hidden="true"></div>
+                        </div>
+                        <div class="gallery-lightbox-copy">
+                            <p id="gallery-lightbox-caption" class="gallery-lightbox-caption">Image Preview</p>
+                        </div>
+                        <button type="button" class="gallery-lightbox-nav gallery-lightbox-next" aria-label="Next image" id="gallery-lightbox-next">&#10095;</button>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -626,9 +784,9 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
-    <script src="./app.js?v=20260510-8"></script>
-    <script src="./chatbot.js?v=20260510-8"></script>
-    <script src="./honeycomb.js?v=20260510-8"></script>
-    <script src="./backgrounds.js?v=20260510-8"></script>
+    <script src="./app.js?v=20260510-17"></script>
+    <script src="./chatbot.js?v=20260510-17"></script>
+    <script src="./honeycomb.js?v=20260510-17"></script>
+    <script src="./backgrounds.js?v=20260510-17"></script>
 </body>
 </html>
